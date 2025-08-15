@@ -1,0 +1,58 @@
+name: Build iOS App
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-ios:
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.16.5'
+        channel: 'stable'
+    
+    - name: Install dependencies
+      run: flutter pub get
+    
+    - name: Build iOS (no signing)
+      run: |
+        flutter build ios --release --no-codesign
+    
+    - name: Create IPA (unsigned)
+      run: |
+        mkdir -p build/ios/ipa
+        cp -r build/ios/iphoneos/Runner.app build/ios/ipa/
+        cd build/ios/ipa
+        zip -r ../../../gizli-kitap-unsigned.ipa .
+    
+    - name: Upload IPA
+      uses: actions/upload-artifact@v3
+      with:
+        name: gizli-kitap-ios-unsigned
+        path: gizli-kitap-unsigned.ipa
+        retention-days: 30
+    
+    - name: Build iOS Simulator
+      run: |
+        flutter build ios --simulator --release
+    
+    - name: Create Simulator App
+      run: |
+        cd build/ios/iphonesimulator
+        zip -r ../../../gizli-kitap-simulator.zip Runner.app
+    
+    - name: Upload Simulator App
+      uses: actions/upload-artifact@v3
+      with:
+        name: gizli-kitap-ios-simulator
+        path: gizli-kitap-simulator.zip
+        retention-days: 30
