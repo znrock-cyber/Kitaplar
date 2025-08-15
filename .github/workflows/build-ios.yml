@@ -12,12 +12,12 @@ jobs:
     runs-on: macos-latest
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Setup Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.16.5'
+        flutter-version: '3.24.0'
         channel: 'stable'
     
     - name: Install dependencies
@@ -35,7 +35,7 @@ jobs:
         zip -r ../../../gizli-kitap-unsigned.ipa .
     
     - name: Upload IPA
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: gizli-kitap-ios-unsigned
         path: gizli-kitap-unsigned.ipa
@@ -51,7 +51,7 @@ jobs:
         zip -r ../../../gizli-kitap-simulator.zip Runner.app
     
     - name: Upload Simulator App
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: gizli-kitap-ios-simulator
         path: gizli-kitap-simulator.zip
