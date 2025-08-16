@@ -1,0 +1,103 @@
+name: iOS Build and Deploy to TestFlight
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build-ios:
+    runs-on: macos-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.16.0'
+        channel: 'stable'
+        cache: true
+    
+    - name: Install Flutter dependencies
+      run: flutter pub get
+    
+    - name: Run Flutter tests
+      run: flutter test
+    
+    - name: Setup Xcode
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+    
+    - name: Install CocoaPods
+      run: |
+        cd ios
+        pod install
+        cd ..
+    
+    - name: Import Code-Signing Certificates
+      uses: Apple-Actions/import-codesign-certs@v2
+      with:
+        p12-file-base64: ${{ secrets.CERTIFICATES_P12 }}
+        p12-password: ${{ secrets.CERTIFICATES_PASSWORD }}
+    
+    - name: Download Provisioning Profiles
+      uses: Apple-Actions/download-provisioning-profiles@v1
+      with:
+        bundle-id: 'com.gizlikitap.app'
+        issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
+        api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
+        api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
+    
+    - name: Build iOS App
+      run: |
+        flutter build ios --release --no-codesign
+        cd ios
+        xcodebuild -workspace Runner.xcworkspace \
+                   -scheme Runner \
+                   -configuration Release \
+                   -destination generic/platform=iOS \
+                   -archivePath build/Runner.xcarchive \
+                   archive
+    
+    - name: Export IPA
+      run: |
+        cd ios
+        xcodebuild -exportArchive \
+                   -archivePath build/Runner.xcarchive \
+                   -exportOptionsPlist ExportOptions.plist \
+                   -exportPath build/
+    
+    - name: Upload to TestFlight
+      uses: Apple-Actions/upload-testflight-build@v1
+      with:
+        app-path: 'ios/build/Runner.ipa'
+        issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
+        api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
+        api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
+    
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: ios-build-artifacts
+        path: |
+          ios/build/Runner.ipa
+          ios/build/Runner.xcarchive
+        retention-days: 30
+    
+    - name: Notify build completion
+      if: success()
+      run: |
+        echo "✅ iOS build completed successfully!"
+        echo "📱 App uploaded to TestFlight"
+        echo "🔗 Check App Store Connect for processing status"
+    
+    - name: Notify build failure
+      if: failure()
+      run: |
+        echo "❌ iOS build failed!"
+        echo "📋 Check the logs above for error details"
+        echo "🔧 Common issues: certificates, provisioning profiles, or code signing"

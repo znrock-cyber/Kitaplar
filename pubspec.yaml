@@ -1,5 +1,5 @@
-name: kitap_uygulamasi
-description: Kitap önerileri uygulaması
+name: gizli_kitap
+description: Gizli Kitap - Kitap önerileri ve gizli içerikler uygulaması
 version: 1.0.0+1
 
 environment:
@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   webview_flutter: ^4.4.2
+  webview_flutter_web: ^0.2.2+4
   shared_preferences: ^2.2.2
   cupertino_icons: ^1.0.2
 

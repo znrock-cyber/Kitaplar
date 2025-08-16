@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
 import 'dart:io';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'screens/book_home_screen.dart';
-import 'screens/secret_screen.dart';
+// Web için webview desteği
+import 'package:webview_flutter_web/webview_flutter_web.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 void main() {
+  // Web platformu için webview desteğini etkinleştir
+  if (kIsWeb) {
+    WebViewPlatform.instance = WebWebViewPlatform();
+  }
   runApp(MyApp());
 }
 
@@ -14,14 +20,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // iOS için özel tasarım
-    if (Platform.isIOS) {
+    if (!kIsWeb && Platform.isIOS) {
       return CupertinoApp(
-        title: 'Kitap Önerileri',
+        title: 'BookReader',
         theme: CupertinoThemeData(
-          primaryColor: CupertinoColors.systemBrown,
-          scaffoldBackgroundColor: Color(0xFFF5F5DC),
+          primaryColor: CupertinoColors.systemOrange,
+          scaffoldBackgroundColor: CupertinoColors.black,
+          brightness: Brightness.dark,
           textTheme: CupertinoTextThemeData(
-            primaryColor: CupertinoColors.systemBrown,
+            primaryColor: CupertinoColors.white,
           ),
         ),
         home: SplashScreen(),
@@ -29,12 +36,18 @@ class MyApp extends StatelessWidget {
       );
     }
     
-    // Android için Material Design
+    // Android ve Web için Material Design
     return MaterialApp(
-      title: 'Kitap Önerileri',
+      title: 'BookReader',
       theme: ThemeData(
-        primarySwatch: Colors.brown,
+        primarySwatch: Colors.orange,
+        scaffoldBackgroundColor: Colors.black,
+        brightness: Brightness.dark,
         fontFamily: 'Roboto',
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.black,
+          foregroundColor: Colors.white,
+        ),
       ),
       home: SplashScreen(),
       debugShowCheckedModeBanner: false,
@@ -47,127 +60,163 @@ class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
-  String _secretCode = '';
-  bool _showSecretInput = false;
-  int _tapCount = 0;
-  DateTime? _lastTap;
+class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin {
+  late AnimationController _fadeController;
+  late AnimationController _scaleController;
+  late Animation<double> _fadeAnimation;
+  late Animation<double> _scaleAnimation;
 
   @override
   void initState() {
     super.initState();
+    
+    _fadeController = AnimationController(
+      duration: Duration(milliseconds: 1500),
+      vsync: this,
+    );
+    
+    _scaleController = AnimationController(
+      duration: Duration(milliseconds: 1000),
+      vsync: this,
+    );
+    
+    _fadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: _fadeController,
+      curve: Curves.easeInOut,
+    ));
+    
+    _scaleAnimation = Tween<double>(
+      begin: 0.5,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: _scaleController,
+      curve: Curves.elasticOut,
+    ));
+    
+    _startAnimations();
     _loadApp();
   }
 
+  void _startAnimations() {
+    _scaleController.forward();
+    Future.delayed(Duration(milliseconds: 300), () {
+      _fadeController.forward();
+    });
+  }
+
   void _loadApp() async {
-    await Future.delayed(Duration(seconds: 2));
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (context) => BookHomeScreen()),
-    );
-  }
-
-  void _onLogoTap() {
-    final now = DateTime.now();
-    if (_lastTap != null && now.difference(_lastTap!).inSeconds > 2) {
-      _tapCount = 0;
-    }
-    _lastTap = now;
-    _tapCount++;
-
-    if (_tapCount >= 5) {
-      setState(() {
-        _showSecretInput = true;
-      });
-    }
-  }
-
-  void _checkSecretCode() {
-    if (_secretCode == '1234') {
+    await Future.delayed(Duration(seconds: 3));
+    if (mounted) {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => SecretScreen()),
-      );
-    } else {
-      setState(() {
-        _secretCode = '';
-        _showSecretInput = false;
-        _tapCount = 0;
-      });
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Yanlış kod!')),
+        PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => BookHomeScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(
+              opacity: animation,
+              child: child,
+            );
+          },
+          transitionDuration: Duration(milliseconds: 800),
+        ),
       );
     }
   }
 
   @override
+  void dispose() {
+    _fadeController.dispose();
+    _scaleController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // iOS için haptic feedback
-    if (Platform.isIOS) {
+    // iOS için tasarım
+    if (!kIsWeb && Platform.isIOS) {
       return CupertinoPageScaffold(
-        backgroundColor: Color(0xFFF5F5DC),
+        backgroundColor: CupertinoColors.black,
         child: SafeArea(
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                GestureDetector(
-                  onTap: () {
-                    HapticFeedback.lightImpact(); // iOS haptic feedback
-                    _onLogoTap();
-                  },
-                  child: Container(
-                    width: 120,
-                    height: 120,
-                    decoration: BoxDecoration(
-                      color: CupertinoColors.systemBrown,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: CupertinoColors.systemGrey.withOpacity(0.3),
-                          blurRadius: 10,
-                          offset: Offset(0, 5),
+                AnimatedBuilder(
+                  animation: _scaleAnimation,
+                  builder: (context, child) {
+                    return Transform.scale(
+                      scale: _scaleAnimation.value,
+                      child: Container(
+                        width: 140,
+                        height: 140,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              CupertinoColors.systemOrange,
+                              CupertinoColors.systemRed,
+                              CupertinoColors.systemPurple,
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(30),
+                          boxShadow: [
+                            BoxShadow(
+                              color: CupertinoColors.systemOrange.withOpacity(0.4),
+                              blurRadius: 20,
+                              offset: Offset(0, 10),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                    child: Icon(
-                      CupertinoIcons.book,
-                      size: 60,
-                      color: CupertinoColors.white,
+                        child: Icon(
+                          CupertinoIcons.book_fill,
+                          size: 70,
+                          color: CupertinoColors.white,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                SizedBox(height: 30),
+                FadeTransition(
+                  opacity: _fadeAnimation,
+                  child: Column(
+                    children: [
+                      Text(
+                        'BookReader',
+                        style: TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          color: CupertinoColors.white,
+                          letterSpacing: 1.2,
+                        ),
+                      ),
+                      SizedBox(height: 12),
+                      Text(
+                        'Discover Amazing Stories',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: CupertinoColors.systemGrey,
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 60),
+                FadeTransition(
+                  opacity: _fadeAnimation,
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    child: CupertinoActivityIndicator(
+                      color: CupertinoColors.systemOrange,
+                      radius: 15,
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
-                Text(
-                  'Kitap Önerileri',
-                  style: CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle.copyWith(
-                    color: CupertinoColors.systemBrown,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  'En iyi kitapları keşfedin',
-                  style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                    color: CupertinoColors.systemGrey,
-                  ),
-                ),
-                if (_showSecretInput) ...[
-                  SizedBox(height: 40),
-                  Container(
-                    width: 200,
-                    child: CupertinoTextField(
-                      onChanged: (value) => _secretCode = value,
-                      obscureText: true,
-                      textAlign: TextAlign.center,
-                      placeholder: 'Gizli kod',
-                      onSubmitted: (_) => _checkSecretCode(),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  CupertinoButton.filled(
-                    onPressed: _checkSecretCode,
-                    child: Text('Giriş'),
-                  ),
-                ],
               ],
             ),
           ),
@@ -175,67 +224,87 @@ class _SplashScreenState extends State<SplashScreen> {
       );
     }
     
-    // Android için Material Design
+    // Android ve Web için Material Design
     return Scaffold(
-      backgroundColor: Color(0xFFF5F5DC),
+      backgroundColor: Colors.black,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            GestureDetector(
-              onTap: _onLogoTap,
-              child: Container(
-                width: 120,
-                height: 120,
-                decoration: BoxDecoration(
-                  color: Colors.brown[700],
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Icon(
-                  Icons.menu_book,
-                  size: 60,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Kitap Önerileri',
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Colors.brown[800],
-              ),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'En iyi kitapları keşfedin',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.brown[600],
-              ),
-            ),
-            if (_showSecretInput) ...[
-              SizedBox(height: 40),
-              Container(
-                width: 200,
-                child: TextField(
-                  onChanged: (value) => _secretCode = value,
-                  obscureText: true,
-                  textAlign: TextAlign.center,
-                  decoration: InputDecoration(
-                    hintText: 'Gizli kod',
-                    border: OutlineInputBorder(),
+            AnimatedBuilder(
+              animation: _scaleAnimation,
+              builder: (context, child) {
+                return Transform.scale(
+                  scale: _scaleAnimation.value,
+                  child: Container(
+                    width: 140,
+                    height: 140,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Colors.orange,
+                          Colors.red,
+                          Colors.purple,
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(30),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.orange.withOpacity(0.4),
+                          blurRadius: 20,
+                          offset: Offset(0, 10),
+                        ),
+                      ],
+                    ),
+                    child: Icon(
+                      Icons.auto_stories,
+                      size: 70,
+                      color: Colors.white,
+                    ),
                   ),
-                  onSubmitted: (_) => _checkSecretCode(),
+                );
+              },
+            ),
+            SizedBox(height: 30),
+            FadeTransition(
+              opacity: _fadeAnimation,
+              child: Column(
+                children: [
+                  Text(
+                    'BookReader',
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      letterSpacing: 1.2,
+                    ),
+                  ),
+                  SizedBox(height: 12),
+                  Text(
+                    'Discover Amazing Stories',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey[400],
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 60),
+            FadeTransition(
+              opacity: _fadeAnimation,
+              child: Container(
+                width: 30,
+                height: 30,
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.orange),
+                  strokeWidth: 3,
                 ),
               ),
-              SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: _checkSecretCode,
-                child: Text('Giriş'),
-              ),
-            ],
+            ),
           ],
         ),
       ),
