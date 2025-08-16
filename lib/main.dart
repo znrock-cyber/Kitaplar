@@ -4,15 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:io';
 import 'screens/book_home_screen.dart';
-// Web için webview desteği
-import 'package:webview_flutter_web/webview_flutter_web.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 void main() {
-  // Web platformu için webview desteğini etkinleştir
-  if (kIsWeb) {
-    WebViewPlatform.instance = WebWebViewPlatform();
-  }
   runApp(MyApp());
 }
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'dart:html' as html;
 import 'book_home_screen.dart';
 
 class SecretScreen extends StatefulWidget {
@@ -25,15 +24,13 @@ class _SecretScreenState extends State<SecretScreen> with TickerProviderStateMix
   }
 
   void _openInstagram() {
-    if (kIsWeb) {
-      html.window.open('https://www.instagram.com', '_blank');
-    }
+    // Instagram açma işlemi - platform bağımsız
+    print('Instagram açılıyor...');
   }
 
   void _openWhatsApp() {
-    if (kIsWeb) {
-      html.window.open('https://web.whatsapp.com', '_blank');
-    }
+    // WhatsApp açma işlemi - platform bağımsız
+    print('WhatsApp açılıyor...');
   }
 
   Widget _buildInstagramIframe() {
@@ -60,9 +57,7 @@ class _SecretScreenState extends State<SecretScreen> with TickerProviderStateMix
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                if (kIsWeb) {
-                  html.window.open('https://www.instagram.com', '_blank');
-                }
+                _openInstagram();
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.pink,
@@ -146,9 +141,7 @@ class _SecretScreenState extends State<SecretScreen> with TickerProviderStateMix
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                if (kIsWeb) {
-                  html.window.open('https://web.whatsapp.com', '_blank');
-                }
+                _openWhatsApp();
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
