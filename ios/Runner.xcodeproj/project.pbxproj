@@ -486,3 +486,9 @@
 	};
 	rootObject = 97C146E61CF9000F007C117D /* Project object */;
 }
+
+> "[!] CocoaPods could not find compatible versions for pod "Flutter": Specs satisfying the `Flutter (from `.Flutter`)` dependency were found, but they required a higher minimum deployment target."
+
+## 1. iOS Deployment Target'ı 12.0'a güncelleyelim
+
+<mcfile name="project.pbxproj" path="c:\Users\ozenk\OneDrive\Masaüstü\uygulama 3\ios\Runner.xcodeproj\project.pbxproj"></mcfile> dosyasındaki tüm deployment target değerlerini güncelleyelim:
