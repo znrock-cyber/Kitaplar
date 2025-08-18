@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     // iOS için özel tasarım
     if (!kIsWeb && Platform.isIOS) {
       return CupertinoApp(
-        title: 'BookReader',
+        title: 'Kitaplar',
         theme: CupertinoThemeData(
           primaryColor: CupertinoColors.systemOrange,
           scaffoldBackgroundColor: CupertinoColors.black,
@@ -29,10 +29,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
       );
     }
-    
+
     // Android ve Web için Material Design
     return MaterialApp(
-      title: 'BookReader',
+      title: 'Kitaplar',
       theme: ThemeData(
         primarySwatch: Colors.orange,
         scaffoldBackgroundColor: Colors.black,
@@ -54,7 +54,8 @@ class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen>
+    with TickerProviderStateMixin {
   late AnimationController _fadeController;
   late AnimationController _scaleController;
   late Animation<double> _fadeAnimation;
@@ -63,17 +64,17 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   @override
   void initState() {
     super.initState();
-    
+
     _fadeController = AnimationController(
       duration: Duration(milliseconds: 1500),
       vsync: this,
     );
-    
+
     _scaleController = AnimationController(
       duration: Duration(milliseconds: 1000),
       vsync: this,
     );
-    
+
     _fadeAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
@@ -81,7 +82,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       parent: _fadeController,
       curve: Curves.easeInOut,
     ));
-    
+
     _scaleAnimation = Tween<double>(
       begin: 0.5,
       end: 1.0,
@@ -89,7 +90,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       parent: _scaleController,
       curve: Curves.elasticOut,
     ));
-    
+
     _startAnimations();
     _loadApp();
   }
@@ -106,7 +107,8 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     if (mounted) {
       Navigator.of(context).pushReplacement(
         PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) => BookHomeScreen(),
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              BookHomeScreen(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(
               opacity: animation,
@@ -158,7 +160,8 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                           borderRadius: BorderRadius.circular(30),
                           boxShadow: [
                             BoxShadow(
-                              color: CupertinoColors.systemOrange.withOpacity(0.4),
+                              color:
+                                  CupertinoColors.systemOrange.withOpacity(0.4),
                               blurRadius: 20,
                               offset: Offset(0, 10),
                             ),
@@ -179,7 +182,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                   child: Column(
                     children: [
                       Text(
-                        'BookReader',
+                        'Kitaplar',
                         style: TextStyle(
                           fontSize: 32,
                           fontWeight: FontWeight.bold,
@@ -189,7 +192,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                       ),
                       SizedBox(height: 12),
                       Text(
-                        'Discover Amazing Stories',
+                        'Kitap Keşfet',
                         style: TextStyle(
                           fontSize: 16,
                           color: CupertinoColors.systemGrey,
@@ -217,7 +220,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
         ),
       );
     }
-    
+
     // Android ve Web için Material Design
     return Scaffold(
       backgroundColor: Colors.black,
@@ -267,7 +270,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
               child: Column(
                 children: [
                   Text(
-                    'BookReader',
+                    'Kitaplar',
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
@@ -277,7 +280,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                   ),
                   SizedBox(height: 12),
                   Text(
-                    'Discover Amazing Stories',
+                    'Kitap Keşfet',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.grey[400],

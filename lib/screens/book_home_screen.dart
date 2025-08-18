@@ -323,13 +323,25 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         elevation: 0,
-        title: Text(
-          'BookShelf',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Kitaplar',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              'Dijital Kütüphaneniz',
+              style: TextStyle(
+                color: Colors.white70,
+                fontSize: 14,
+              ),
+            ),
+          ],
         ),
         actions: [
           IconButton(
@@ -450,11 +462,11 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                 Navigator.pop(context);
                 showAboutDialog(
                   context: context,
-                  applicationName: 'BookShelf',
+                  applicationName: 'Kitaplar',
                   applicationVersion: '1.0.0',
                   applicationIcon: Icon(Icons.auto_stories, size: 50, color: Colors.deepPurple),
                   children: [
-                    Text('Your personal digital library for discovering and reading amazing books.'),
+                    Text('Kişisel dijital kütüphaneniz, harika kitapları keşfetmek ve okumak için.'),
                   ],
                 );
               },

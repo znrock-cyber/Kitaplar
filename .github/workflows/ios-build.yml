@@ -176,6 +176,12 @@ jobs:
                        -exportPath build/
         
         - name: Upload to TestFlight
+          if: success()
+          run: |
+            xcrun altool --upload-app --type ios --file "build/ios/ipa/kitaplar.ipa" \
+              --username "${{ secrets.APPLE_ID }}" \
+              --password "${{ secrets.APPLE_APP_PASSWORD }}" \
+              --verbose
           uses: Apple-Actions/upload-testflight-build@v1
           with:
             app-path: 'ios/build/Runner.ipa'
