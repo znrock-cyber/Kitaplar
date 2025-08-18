@@ -1,4 +1,4 @@
-name: iOS Build and Deploy to TestFlight
+name: Build iOS App
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-ios:
-    runs-on: macos-latest
+    runs-on: macos-14
     
     steps:
     - name: Checkout repository
@@ -56,32 +56,68 @@ jobs:
         cd build/unsigned
         mkdir Payload
         mv Runner.app Payload/
-        zip -r ../Runner.ipa Payload/
+        zip -r ../Kitaplar.ipa Payload/
         ls -la ../
+        echo "📱 IPA dosyası oluşturuldu: Kitaplar.ipa"
+    
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ github.run_number }}
+        release_name: Kitaplar iOS v${{ github.run_number }}
+        body: |
+          📱 **Kitaplar iOS Uygulaması**
+          
+          🔧 **Kurulum:**
+          1. IPA dosyasını indirin
+          2. AltStore veya Sideloadly kullanarak yükleyin
+          
+          📋 **Özellikler:**
+          - WebView tabanlı kitap okuma
+          - Tam ekran tarayıcı deneyimi
+          - iOS optimizasyonları
+          
+          ⚠️ **Not:** Bu imzasız bir IPA dosyasıdır. Sideloading gerektirir.
+        draft: false
+        prerelease: false
+    
+    - name: Upload IPA to Release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ios/build/Kitaplar.ipa
+        asset_name: Kitaplar-iOS-v${{ github.run_number }}.ipa
+        asset_content_type: application/octet-stream
     
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       if: always()
       with:
-        name: ios-build-artifacts
+        name: ios-build-artifacts-v${{ github.run_number }}
         path: |
-          ios/build/Runner.ipa
+          ios/build/Kitaplar.ipa
           ios/build/Runner.xcarchive
         retention-days: 30
     
     - name: Notify build completion
       if: success()
       run: |
-        echo "✅ iOS build completed successfully!"
-        echo "📱 Unsigned IPA created for sideloading"
-        echo "📦 Check artifacts for download"
+        echo "✅ Kitaplar iOS uygulaması başarıyla oluşturuldu!"
+        echo "📱 İmzasız IPA dosyası hazır"
+        echo "🔗 GitHub Releases sekmesinden indirebilirsiniz"
+        echo "📦 Artifacts'ten de erişilebilir"
     
     - name: Notify build failure
       if: failure()
       run: |
-        echo "❌ iOS build failed!"
-        echo "📋 Check the logs above for error details"
-        echo "🔧 Common issues: dependencies, build configuration, or Xcode setup"
+        echo "❌ iOS build başarısız oldu!"
+        echo "📋 Yukarıdaki logları kontrol edin"
+        echo "🔧 Olası sorunlar: bağımlılıklar, build konfigürasyonu veya Xcode kurulumu"
         - name: Setup Flutter
           uses: subosito/flutter-action@v2
           with:
