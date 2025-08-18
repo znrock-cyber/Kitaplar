@@ -4,6 +4,7 @@ on:
   push:
     branches: [ main, master ]
   workflow_dispatch:
+
 permissions:
   contents: write
 
@@ -22,8 +23,14 @@ jobs:
         channel: 'stable'
         cache: true
     
-    - name: Install Flutter dependencies
-      run: flutter pub get
+    - name: Flutter Doctor
+      run: flutter doctor -v
+    
+    - name: Clean Flutter Cache
+      run: |
+        flutter clean
+        flutter pub cache clean
+        flutter pub get
     
     - name: Run Flutter tests
       run: flutter test
@@ -34,31 +41,51 @@ jobs:
       with:
         xcode-version: latest-stable
     
+    - name: Clean iOS Build Directory
+      run: |
+        cd ios
+        rm -rf build/
+        rm -rf Pods/
+        rm -rf Podfile.lock
+        rm -rf .symlinks/
+        cd ..
+    
     - name: Install CocoaPods
       run: |
-        sudo gem install cocoapods -N
+        echo "Installing CocoaPods..."
+        sudo gem install cocoapods --no-document
+        echo "CocoaPods version:"
+        pod --version
+        echo "Updating CocoaPods repositories..."
+        pod repo update
+        echo "Installing iOS dependencies..."
         cd ios
-        pod install --repo-update
+        pod install --verbose
         cd ..
     
     - name: Build iOS App
       run: |
-        flutter build ios --release --no-codesign
+        echo "Building iOS app..."
+        flutter build ios --release --no-codesign --verbose
+        echo "Creating Xcode archive..."
         cd ios
         xcodebuild -workspace Runner.xcworkspace \
                    -scheme Runner \
                    -configuration Release \
                    -destination generic/platform=iOS \
                    -archivePath build/Runner.xcarchive \
-                   archive
+                   archive \
+                   CODE_SIGNING_ALLOWED=NO
     
     - name: Export IPA
       run: |
+        echo "Exporting IPA..."
         cd ios
         xcodebuild -exportArchive \
                    -archivePath build/Runner.xcarchive \
                    -exportOptionsPlist ExportOptions.plist \
-                   -exportPath build/
+                   -exportPath build/ \
+                   -allowProvisioningUpdates
     
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
