@@ -90,6 +90,19 @@ jobs:
           files: ios/build/Runner.ipa
           draft: false
           prerelease: false
+          
+      - name: Notify build completion
+        if: success()
+        run: |
+          echo "✅ iOS build completed successfully!"
+          echo "📱 App built and released"
+          
+      - name: Notify build failure
+        if: failure()
+        run: |
+          echo "❌ iOS build failed!"
+          echo "📋 Check the logs above for error details"
+          echo "🔧 Common issues: certificates, provisioning profiles, or code signing"
     - name: Setup Flutter
       uses: subosito/flutter-action@v2
       with:
