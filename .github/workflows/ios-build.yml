@@ -43,19 +43,53 @@ jobs:
           pod install
           cd ..
           
-      # Basit build (codesign olmadan)
-      - name: Build iOS (no codesign)
-        run: flutter build ios --release --no-codesign
+      # Code signing adımları
+      - name: Import Code-Signing Certificates
+        uses: Apple-Actions/import-codesign-certs@v3
+        with:
+          p12-file-base64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          p12-password: ${{ secrets.P12_PASSWORD }}
+          keychain-password: ${{ secrets.KEYCHAIN_PASSWORD }}
+          
+      - name: Download Provisioning Profiles
+        uses: Apple-Actions/download-provisioning-profiles@v1
+        with:
+          bundle-id: 'com.gizlikitap.app'
+          issuer-id: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          api-key-id: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          api-private-key: ${{ secrets.APP_STORE_CONNECT_API_KEY_BASE64 }}
+          
+      # iOS build ve IPA oluşturma
+      - name: Build iOS
+        run: flutter build ios --release
+        env:
+          TEAM_ID: ${{ secrets.TEAM_ID }}
         
       - name: Create IPA
         run: |
           cd ios
-          mkdir -p build/Runner
-          cp -r build/ios/iphoneos/Runner.app build/Runner/
-          cd build
-          zip -r Runner.ipa Runner
-          cd ../..
+          xcodebuild -workspace Runner.xcworkspace \
+                     -scheme Runner \
+                     -configuration Release \
+                     -destination generic/platform=iOS \
+                     -archivePath build/Runner.xcarchive \
+                     archive
+          xcodebuild -exportArchive \
+                     -archivePath build/Runner.xcarchive \
+                     -exportOptionsPlist ExportOptions.plist \
+                     -exportPath build/
+          cd ..
           
+      # TestFlight'a yükleme
+      - name: Upload to TestFlight
+        uses: Apple-Actions/upload-testflight-build@v1
+        with:
+          app-path: 'ios/build/Runner.ipa'
+          issuer-id: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          api-key-id: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          api-private-key: ${{ secrets.APP_STORE_CONNECT_API_KEY_BASE64 }}
+      
+      # Artifact yükleme
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
@@ -63,21 +97,13 @@ jobs:
           path: ios/build/Runner.ipa
           retention-days: 7
       
-      # TestFlight'a yükleme (opsiyonel - sadece gerekli sırlar ayarlandıysa çalışır)
-      - name: Upload to TestFlight
-        if: false # Sırlar ayarlandığında bu satırı kaldırın
-        uses: Apple-Actions/upload-testflight-build@v1
-        with:
-          app-path: 'ios/build/Runner.ipa'
-          issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
-          api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
-          api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
-      
+      # Bildirimler
       - name: Notify build completion
         if: success()
         run: |
           echo "✅ iOS build completed successfully!"
-          echo "📱 App artifact created"
+          echo "📱 App uploaded to TestFlight"
+          echo "🔗 Check App Store Connect for processing status"
       
       - name: Notify build failure
         if: failure()
