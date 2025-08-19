@@ -30,7 +30,7 @@ class LicenseScreen extends StatelessWidget {
             elevation: 8,
             color: Colors.grey[900],
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: const BorderRadius.all(Radius.circular(15)),
             ),
             child: Padding(
               padding: const EdgeInsets.all(20.0),
@@ -109,7 +109,7 @@ class LicenseScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Colors.amber.withValues(alpha: 0.1),
                       border: Border.all(color: Colors.amber),
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
                     ),
                     child: const Row(
                       children: [
@@ -147,7 +147,7 @@ class LicenseScreen extends StatelessWidget {
                           vertical: 15,
                         ),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25),
+                          borderRadius: const BorderRadius.all(Radius.circular(25)),
                         ),
                         elevation: 5,
                       ),

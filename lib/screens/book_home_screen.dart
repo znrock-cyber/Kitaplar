@@ -224,11 +224,11 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.favorite_border,
-                          size: 64,
-                          color: Colors.grey[600],
-                        ),
-                        SizedBox(height: 16),
+                            Icons.favorite_border,
+                            size: 64,
+                            color: Colors.grey[600],
+                          ),
+                        const SizedBox(height: 16),
                         Text(
                           'No favorite books yet',
                           style: TextStyle(
@@ -236,7 +236,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                             fontSize: 16,
                           ),
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Text(
                           'Tap the heart icon on any book to add it to favorites',
                           style: TextStyle(
@@ -258,9 +258,9 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                           height: 60,
                           decoration: BoxDecoration(
                             color: book['color'].withValues(alpha: 0.8),
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: const BorderRadius.all(Radius.circular(8)),
                           ),
-                          child: Icon(
+                          child: const Icon(
                             Icons.menu_book,
                             color: Colors.white,
                             size: 20,
@@ -278,10 +278,10 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                           style: TextStyle(color: Colors.grey[400]),
                         ),
                         trailing: IconButton(
-                          icon: Icon(
-                            Icons.favorite,
-                            color: Colors.red,
-                          ),
+                          icon: const Icon(
+                              Icons.favorite,
+                              color: Colors.red,
+                            ),
                           onPressed: () {
                             setState(() {
                               _favoriteBooks.remove(book['title']);
@@ -358,7 +358,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
       drawer: Drawer(
         backgroundColor: Colors.grey[900],
         child: ListView(
-          padding: EdgeInsets.zero,
+          padding: const EdgeInsets.all(0),
           children: [
             DrawerHeader(
               decoration: BoxDecoration(
@@ -371,12 +371,12 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.auto_stories,
                     size: 50,
                     color: Colors.white,
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
                     'BookShelf',
                     style: TextStyle(
@@ -396,20 +396,20 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.home, color: Colors.white),
+              leading: const Icon(Icons.home, color: Colors.white),
               title: Text('Home', style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: Icon(Icons.favorite, color: Colors.red),
+              leading: const Icon(Icons.favorite, color: Colors.red),
               title: Text('Favorites', style: TextStyle(color: Colors.white)),
               trailing: _favoriteBooks.isNotEmpty ? Container(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
                   color: Colors.red,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: const BorderRadius.all(Radius.circular(12)),
                 ),
                 child: Text(
                   _favoriteBooks.length.toString(),
@@ -424,7 +424,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
 
             Divider(color: Colors.grey[700]),
             ListTile(
-              leading: Icon(Icons.privacy_tip, color: Colors.deepPurple),
+              leading: const Icon(Icons.privacy_tip, color: Colors.deepPurple),
               title: Text('Privacy Policy', style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
@@ -437,7 +437,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.gavel, color: Colors.deepPurple),
+              leading: const Icon(Icons.gavel, color: Colors.deepPurple),
               title: Text('License', style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
@@ -460,9 +460,9 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                   context: context,
                   applicationName: 'Kitaplar',
                   applicationVersion: '1.0.0',
-                  applicationIcon: Icon(Icons.auto_stories, size: 50, color: Colors.deepPurple),
+                  applicationIcon: const Icon(Icons.auto_stories, size: 50, color: Colors.deepPurple),
                   children: [
-                    Text('Kişisel dijital kütüphaneniz, harika kitapları keşfetmek ve okumak için.'),
+                    const Text('Kişisel dijital kütüphaneniz, harika kitapları keşfetmek ve okumak için.'),
                   ],
                 );
               },
@@ -474,10 +474,10 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
         children: [
           // Search Bar
           Container(
-            margin: EdgeInsets.all(16),
+            margin: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.grey[900],
-              borderRadius: BorderRadius.circular(25),
+              borderRadius: const BorderRadius.all(Radius.circular(25)),
             ),
             child: TextField(
               style: TextStyle(color: Colors.white),
@@ -486,7 +486,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                 hintStyle: TextStyle(color: Colors.grey[400]),
                 prefixIcon: Icon(Icons.search, color: Colors.grey[400]),
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
               ),
               onChanged: (value) {
                 setState(() {
@@ -510,7 +510,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
             height: 50,
             child: ListView(
               scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               children: [
                 _buildCategoryChip('All', _selectedCategory == 'All'),
                 _buildCategoryChip('Classic', _selectedCategory == 'Classic'),
@@ -526,12 +526,12 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
               ],
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           // Books Grid
           Expanded(
             child: GridView.builder(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 0.7,
                 crossAxisSpacing: 16,
@@ -566,23 +566,23 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
         },
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: const Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.explore),
+            icon: const Icon(Icons.explore),
             label: 'Explore',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.library_books),
+            icon: const Icon(Icons.library_books),
             label: 'Library',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.web),
+            icon: const Icon(Icons.web),
             label: 'Tarayıcı',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: const Icon(Icons.person),
             label: 'Profile',
           ),
         ],
@@ -620,7 +620,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
       onTap: () => _openBookDetail(book),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: const BorderRadius.all(Radius.circular(16)),
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -633,12 +633,12 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
             BoxShadow(
               color: book['color'].withValues(alpha: 0.3),
               blurRadius: 8,
-              offset: Offset(0, 4),
+              offset: const Offset(0, 4),
             ),
           ],
         ),
         child: Padding(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -648,11 +648,11 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                 child: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: const BorderRadius.all(Radius.circular(8)),
                     color: Colors.white.withValues(alpha: 0.1),
                   ),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: const BorderRadius.all(Radius.circular(8)),
                     child: book['image'] != null
                         ? Image.network(
                             book['image'],
@@ -661,9 +661,9 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                               return Container(
                                 decoration: BoxDecoration(
                                   color: Colors.white.withValues(alpha: 0.2),
-                                  borderRadius: BorderRadius.circular(8),
+                                  borderRadius: const BorderRadius.all(Radius.circular(8)),
                                 ),
-                                child: Icon(
+                                child: const Icon(
                                   Icons.menu_book,
                                   color: Colors.white,
                                   size: 40,
@@ -674,9 +674,9 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                         : Container(
                             decoration: BoxDecoration(
                               color: Colors.white.withValues(alpha: 0.2),
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: const BorderRadius.all(Radius.circular(8)),
                             ),
-                            child: Icon(
+                            child: const Icon(
                               Icons.menu_book,
                               color: Colors.white,
                               size: 40,
@@ -685,7 +685,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               // Book Info
               Expanded(
                 flex: 2,
@@ -702,7 +702,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Text(
                       book['author'],
                       style: TextStyle(
@@ -712,15 +712,15 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    SizedBox(height: 6),
+                    const SizedBox(height: 6),
                      Row(
                        children: [
-                         Icon(
+                         const Icon(
                            Icons.star,
                            color: Colors.amber,
                            size: 14,
                          ),
-                         SizedBox(width: 4),
+                         const SizedBox(width: 4),
                          Text(
                            book['rating'].toString(),
                            style: TextStyle(
@@ -729,12 +729,12 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                              fontWeight: FontWeight.bold,
                            ),
                          ),
-                         Spacer(),
+                         const Spacer(),
                          Container(
-                           padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                            decoration: BoxDecoration(
                              color: Colors.white.withValues(alpha: 0.2),
-                             borderRadius: BorderRadius.circular(8),
+                             borderRadius: const BorderRadius.all(Radius.circular(8)),
                            ),
                            child: Text(
                              book['genre'],
@@ -810,13 +810,13 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                             ),
                           ],
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.menu_book,
                           color: Colors.white,
                           size: 60,
                         ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Text(
                         widget.book['title'],
                         style: TextStyle(
@@ -826,7 +826,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Text(
                         widget.book['author'],
                         style: TextStyle(
@@ -842,15 +842,15 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Rating and Info
                   Row(
                     children: [
-                      Icon(Icons.star, color: Colors.amber, size: 20),
-                      SizedBox(width: 4),
+                      const Icon(Icons.star, color: Colors.amber, size: 20),
+                      const SizedBox(width: 4),
                       Text(
                         widget.book['rating'].toString(),
                         style: TextStyle(
@@ -859,9 +859,9 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(width: 20),
+                      const SizedBox(width: 20),
                       Icon(Icons.book, color: Colors.grey[400], size: 20),
-                      SizedBox(width: 4),
+                      const SizedBox(width: 4),
                       Text(
                         '${widget.book['pages']} pages',
                         style: TextStyle(
@@ -869,9 +869,9 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                           fontSize: 14,
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                         decoration: BoxDecoration(
                           color: widget.book['color'].withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(15),
@@ -887,7 +887,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   // Description
                   Text(
                     'Description',
@@ -897,7 +897,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
                     widget.book['description'],
                     style: TextStyle(
@@ -906,7 +906,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                       height: 1.5,
                     ),
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   // Content Preview
                   Text(
                     'Preview',
@@ -916,9 +916,9 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Container(
-                    padding: EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                       color: Colors.grey[900],
                       borderRadius: BorderRadius.circular(12),
@@ -932,7 +932,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   // Action Buttons
                   Row(
                     children: [
@@ -948,7 +948,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: widget.book['color'],
-                            padding: EdgeInsets.symmetric(vertical: 16),
+                            padding: const EdgeInsets.symmetric(vertical: 16),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
@@ -963,7 +963,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 16),
+                      const SizedBox(width: 16),
                       Container(
                         decoration: BoxDecoration(
                           border: Border.all(color: widget.book['color']),
@@ -1030,20 +1030,20 @@ class _BookReaderScreenState extends State<BookReaderScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
-        ),
+            icon: const Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () => Navigator.pop(context),
+          ),
         title: Text(
           widget.book['title'],
           style: TextStyle(color: Colors.white, fontSize: 18),
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.bookmark_border, color: Colors.white),
+            icon: const Icon(Icons.bookmark_border, color: Colors.white),
             onPressed: () {},
           ),
           IconButton(
-            icon: Icon(Icons.settings, color: Colors.white),
+            icon: const Icon(Icons.settings, color: Colors.white),
             onPressed: () {},
           ),
         ],
@@ -1052,14 +1052,14 @@ class _BookReaderScreenState extends State<BookReaderScreen> {
         children: [
           // Progress Bar
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Row(
               children: [
                 Text(
                   'Page ${_currentPage + 1} of ${_pages.length}',
                   style: TextStyle(color: Colors.grey[400], fontSize: 12),
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(
                   '${((_currentPage + 1) / _pages.length * 100).round()}%',
                   style: TextStyle(color: Colors.grey[400], fontSize: 12),
@@ -1068,7 +1068,7 @@ class _BookReaderScreenState extends State<BookReaderScreen> {
             ),
           ),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 20),
+            margin: const EdgeInsets.symmetric(horizontal: 20),
             height: 2,
             child: LinearProgressIndicator(
               value: (_currentPage + 1) / _pages.length,
@@ -1088,8 +1088,8 @@ class _BookReaderScreenState extends State<BookReaderScreen> {
               itemCount: _pages.length,
               itemBuilder: (context, index) {
                 return Container(
-                  margin: EdgeInsets.all(20),
-                  padding: EdgeInsets.all(20),
+                  margin: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
                     color: Colors.grey[900],
                     borderRadius: BorderRadius.circular(16),
@@ -1111,7 +1111,7 @@ class _BookReaderScreenState extends State<BookReaderScreen> {
           ),
           // Navigation Controls
           Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -1119,7 +1119,7 @@ class _BookReaderScreenState extends State<BookReaderScreen> {
                   onPressed: _currentPage > 0
                       ? () {
                           _pageController.previousPage(
-                            duration: Duration(milliseconds: 300),
+                            duration: const Duration(milliseconds: 300),
                             curve: Curves.easeInOut,
                           );
                         }
@@ -1142,7 +1142,7 @@ class _BookReaderScreenState extends State<BookReaderScreen> {
                   onPressed: _currentPage < _pages.length - 1
                       ? () {
                           _pageController.nextPage(
-                            duration: Duration(milliseconds: 300),
+                            duration: const Duration(milliseconds: 300),
                             curve: Curves.easeInOut,
                           );
                         }
@@ -1190,7 +1190,7 @@ class BookSearchDelegate extends SearchDelegate<String> {
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
-        icon: Icon(Icons.clear, color: Colors.white),
+        icon: const Icon(Icons.clear, color: Colors.white),
         onPressed: () {
           query = '';
         },
@@ -1201,7 +1201,7 @@ class BookSearchDelegate extends SearchDelegate<String> {
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.arrow_back, color: Colors.white),
+      icon: const Icon(Icons.arrow_back, color: Colors.white),
       onPressed: () {
         close(context, '');
       },
@@ -1239,7 +1239,7 @@ class BookSearchDelegate extends SearchDelegate<String> {
                 color: book['color'].withValues(alpha: 0.8),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Icon(
+              child: const Icon(
                 Icons.menu_book,
                 color: Colors.white,
                 size: 20,

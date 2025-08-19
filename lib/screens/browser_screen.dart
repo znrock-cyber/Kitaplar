@@ -112,7 +112,7 @@ class _BrowserScreenState extends State<BrowserScreen> {
             children: [
               TextField(
                 controller: titleController,
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   labelText: 'Başlık',
                   labelStyle: TextStyle(color: Colors.grey),
@@ -198,7 +198,7 @@ class _BrowserScreenState extends State<BrowserScreen> {
           // URL Bar
           Container(
             color: Colors.grey[900],
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             child: Row(
               children: [
                 IconButton(
@@ -231,10 +231,10 @@ class _BrowserScreenState extends State<BrowserScreen> {
                 ),
                 Expanded(
                   child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 8),
+                    margin: const EdgeInsets.symmetric(horizontal: 8),
                     decoration: BoxDecoration(
                       color: Colors.grey[800],
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: const BorderRadius.all(Radius.circular(20)),
                     ),
                     child: TextField(
                       controller: _urlController,
@@ -243,7 +243,7 @@ class _BrowserScreenState extends State<BrowserScreen> {
                         hintText: 'URL girin...',
                         hintStyle: TextStyle(color: Colors.grey),
                         border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(
+                        contentPadding: const EdgeInsets.symmetric(
                           horizontal: 16,
                           vertical: 12,
                         ),
@@ -264,7 +264,7 @@ class _BrowserScreenState extends State<BrowserScreen> {
           // Quick Access Buttons
           Container(
             color: Colors.grey[850],
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -308,7 +308,7 @@ class _BrowserScreenState extends State<BrowserScreen> {
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Text(
               'Yer İmleri',
               style: TextStyle(
@@ -371,7 +371,7 @@ class _BrowserScreenState extends State<BrowserScreen> {
   ) {
     return Expanded(
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 4),
+        margin: const EdgeInsets.symmetric(horizontal: 4),
         child: ElevatedButton(
           onPressed: () {
             _navigateToUrl(url);
@@ -379,17 +379,17 @@ class _BrowserScreenState extends State<BrowserScreen> {
           style: ElevatedButton.styleFrom(
             backgroundColor: color,
             foregroundColor: Colors.white,
-            padding: EdgeInsets.symmetric(vertical: 12),
+            padding: const EdgeInsets.symmetric(vertical: 12),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: const BorderRadius.all(Radius.circular(8)),
             ),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(icon, size: 18),
-              SizedBox(width: 6),
+              const Icon(icon, size: 18),
+              const SizedBox(width: 6),
               Text(
                 title,
                 style: TextStyle(

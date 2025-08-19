@@ -39,13 +39,13 @@ class _SecretScreenState extends State<SecretScreen> with TickerProviderStateMix
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Icons.camera_alt,
               size: 80,
               color: Colors.pink,
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'Instagram',
               style: TextStyle(
                 color: Colors.white,
@@ -53,19 +53,19 @@ class _SecretScreenState extends State<SecretScreen> with TickerProviderStateMix
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 _openInstagram();
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.pink,
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
+                  borderRadius: const BorderRadius.all(Radius.circular(25)),
                 ),
               ),
-              child: Text(
+              child: const Text(
                 'Instagram\'ı Aç',
                 style: TextStyle(
                   color: Colors.white,
@@ -91,8 +91,8 @@ class _SecretScreenState extends State<SecretScreen> with TickerProviderStateMix
         children: [
           // Instagram başlık çubuğu
           Container(
-            padding: EdgeInsets.all(16),
-            child: Row(
+            padding: const EdgeInsets.all(16),
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
@@ -123,13 +123,13 @@ class _SecretScreenState extends State<SecretScreen> with TickerProviderStateMix
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Icons.chat,
               size: 80,
               color: Colors.green,
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'WhatsApp',
               style: TextStyle(
                 color: Colors.white,
@@ -137,19 +137,19 @@ class _SecretScreenState extends State<SecretScreen> with TickerProviderStateMix
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 _openWhatsApp();
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
+                  borderRadius: const BorderRadius.all(Radius.circular(25)),
                 ),
               ),
-              child: Text(
+              child: const Text(
                 'WhatsApp\'ı Aç',
                 style: TextStyle(
                   color: Colors.white,
@@ -173,8 +173,8 @@ class _SecretScreenState extends State<SecretScreen> with TickerProviderStateMix
         children: [
           // WhatsApp başlık çubuğu
           Container(
-            padding: EdgeInsets.all(16),
-            child: Row(
+            padding: const EdgeInsets.all(16),
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
@@ -203,13 +203,13 @@ class _SecretScreenState extends State<SecretScreen> with TickerProviderStateMix
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         backgroundColor: Colors.black,
-        middle: Text(
+        middle: const Text(
           'Özel Bölüm',
           style: TextStyle(color: Colors.white),
         ),
         leading: CupertinoButton(
-          padding: EdgeInsets.zero,
-          child: Icon(Icons.arrow_back, color: Colors.white),
+          padding: const EdgeInsets.all(0),
+          child: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pushReplacement(
               context,
@@ -223,11 +223,11 @@ class _SecretScreenState extends State<SecretScreen> with TickerProviderStateMix
           // Modern Tab Bar with Icons
           Container(
             color: Colors.black,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.grey.shade900,
-                borderRadius: BorderRadius.circular(25),
+                borderRadius: const BorderRadius.all(Radius.circular(25)),
                 border: Border.all(color: Colors.grey.shade700, width: 1),
               ),
               child: Row(
@@ -239,12 +239,12 @@ class _SecretScreenState extends State<SecretScreen> with TickerProviderStateMix
                         setState(() {});
                       },
                       child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 12),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
                         decoration: BoxDecoration(
                           color: _tabController.index == 0 
                               ? Colors.purple.shade600 
                               : Colors.transparent,
-                          borderRadius: BorderRadius.circular(25),
+                          borderRadius: const BorderRadius.all(Radius.circular(25)),
                           gradient: _tabController.index == 0 
                               ? LinearGradient(
                                   colors: [Colors.purple.shade600, Colors.pink.shade500],
@@ -261,7 +261,7 @@ class _SecretScreenState extends State<SecretScreen> with TickerProviderStateMix
                               color: _tabController.index == 0 ? Colors.white : Colors.grey.shade400,
                               size: 20,
                             ),
-                            SizedBox(width: 8),
+                            const SizedBox(width: 8),
                             Text(
                               'Instagram',
                               style: TextStyle(
@@ -282,12 +282,12 @@ class _SecretScreenState extends State<SecretScreen> with TickerProviderStateMix
                         setState(() {});
                       },
                       child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 12),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
                         decoration: BoxDecoration(
                           color: _tabController.index == 1 
                               ? Colors.green.shade600 
                               : Colors.transparent,
-                          borderRadius: BorderRadius.circular(25),
+                          borderRadius: const BorderRadius.all(Radius.circular(25)),
                           gradient: _tabController.index == 1 
                               ? LinearGradient(
                                   colors: [Colors.green.shade600, Colors.green.shade500],
@@ -304,7 +304,7 @@ class _SecretScreenState extends State<SecretScreen> with TickerProviderStateMix
                               color: _tabController.index == 1 ? Colors.white : Colors.grey.shade400,
                               size: 20,
                             ),
-                            SizedBox(width: 8),
+                            const SizedBox(width: 8),
                             Text(
                               'WhatsApp',
                               style: TextStyle(

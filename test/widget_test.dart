@@ -9,7 +9,7 @@ void main() {
     await tester.pumpWidget(MyApp());
     
     // Wait for all animations and timers to complete
-    await tester.pumpAndSettle(Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 5));
 
     // Verify that the app loads successfully
     expect(find.byType(MaterialApp), findsOneWidget);

@@ -30,7 +30,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
             elevation: 8,
             color: Colors.grey[900],
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: const BorderRadius.all(Radius.circular(15)),
             ),
             child: Padding(
               padding: const EdgeInsets.all(20.0),
@@ -114,7 +114,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
                           vertical: 15,
                         ),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25),
+                          borderRadius: const BorderRadius.all(Radius.circular(25)),
                         ),
                         elevation: 5,
                       ),
