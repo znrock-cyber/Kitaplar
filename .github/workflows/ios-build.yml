@@ -27,6 +27,11 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
         
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+        
       - name: Install CocoaPods
         run: |
           gem install cocoapods
@@ -38,6 +43,7 @@ jobs:
           pod install
           cd ..
           
+      # Basit build (codesign olmadan)
       - name: Build iOS (no codesign)
         run: flutter build ios --release --no-codesign
         
@@ -56,6 +62,28 @@ jobs:
           name: ios-build
           path: ios/build/Runner.ipa
           retention-days: 7
+      
+      # TestFlight'a yükleme (opsiyonel - sadece gerekli sırlar ayarlandıysa çalışır)
+      - name: Upload to TestFlight
+        if: false # Sırlar ayarlandığında bu satırı kaldırın
+        uses: Apple-Actions/upload-testflight-build@v1
+        with:
+          app-path: 'ios/build/Runner.ipa'
+          issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
+          api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
+          api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
+      
+      - name: Notify build completion
+        if: success()
+        run: |
+          echo "✅ iOS build completed successfully!"
+          echo "📱 App artifact created"
+      
+      - name: Notify build failure
+        if: failure()
+        run: |
+          echo "❌ iOS build failed!"
+          echo "📋 Check the logs above for error details"
     - name: Setup Flutter
       uses: subosito/flutter-action@v2
       with:
