@@ -50,7 +50,7 @@ jobs:
         run: |
           cd ios
           pod repo update
-          pod install --verbose
+          pod install --repo-update --verbose
           cd ..
           
       # Code signing adımları
@@ -63,9 +63,9 @@ jobs:
           
       - name: Download Provisioning Profiles
         run: |
-          echo "${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}" | base64 --decode > ios/GizliKitapDevelopment.mobileprovision
+          echo "${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}" | base64 --decode > ios/KitapOnerileriDevelopment.mobileprovision
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          cp ios/GizliKitapDevelopment.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+          cp ios/KitapOnerileriDevelopment.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
           
       # iOS build ve IPA oluşturma
       - name: Build iOS
