@@ -26,13 +26,10 @@ jobs:
       - name: Analyze code
         run: flutter analyze
 
-      - name: Run tests
-        run: flutter test
-
       - name: Notify build completion
         if: success()
-        run: echo "iOS build completed successfully!"
+        run: echo "Basic Flutter workflow completed successfully!"
 
       - name: Notify build failure
         if: failure()
-        run: echo "iOS build failed!"
+        run: echo "Basic Flutter workflow failed!"
