@@ -20,7 +20,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.35.1'
+          flutter-version: '3.16.0'
           channel: 'stable'
           cache: true
           
@@ -30,25 +30,10 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
         
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.2'
-          bundler-cache: true
-          
       - name: Install CocoaPods
         run: |
           gem install cocoapods
           pod --version
-          
-      - name: Clean build
-        run: |
-          flutter clean
-          cd ios
-          rm -rf Pods
-          rm -rf Podfile.lock
-          rm -rf .symlinks
-          cd ..
           
       - name: Install Pod dependencies
         run: |
@@ -90,19 +75,6 @@ jobs:
           files: ios/build/Runner.ipa
           draft: false
           prerelease: false
-          
-      - name: Notify build completion
-        if: success()
-        run: |
-          echo "✅ iOS build completed successfully!"
-          echo "📱 App built and released"
-          
-      - name: Notify build failure
-        if: failure()
-        run: |
-          echo "❌ iOS build failed!"
-          echo "📋 Check the logs above for error details"
-          echo "🔧 Common issues: certificates, provisioning profiles, or code signing"
     - name: Setup Flutter
       uses: subosito/flutter-action@v2
       with:
