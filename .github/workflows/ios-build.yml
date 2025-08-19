@@ -24,10 +24,7 @@ jobs:
         run: flutter pub get
 
       - name: Analyze code
-        run: |
-          flutter --version
-          flutter doctor
-          flutter analyze --verbose
+        run: flutter analyze
 
       - name: Run tests
         run: flutter test
