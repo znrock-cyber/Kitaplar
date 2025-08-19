@@ -24,16 +24,12 @@ jobs:
           channel: 'stable'
           cache: true
           
-      - name: Flutter version
-        run: flutter --version
-        
       - name: Install dependencies
         run: flutter pub get
         
       - name: Install CocoaPods
         run: |
           gem install cocoapods
-          
           pod --version
           
       - name: Install Pod dependencies
@@ -60,22 +56,6 @@ jobs:
           name: ios-build
           path: ios/build/Runner.ipa
           retention-days: 7
-          
-      - name: Create Release
-        if: success()
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v1.0.${{ github.run_number }}
-          name: iOS Build v1.0.${{ github.run_number }}
-          body: |
-            🚀 iOS uygulama build'i tamamlandı!
-            
-            📱 **Kurulum:**
-            - AltStore veya Sideloadly ile kurabilirsiniz
-            - Ücretsiz Apple Developer hesabı yeterli
-          files: ios/build/Runner.ipa
-          draft: false
-          prerelease: false
     - name: Setup Flutter
       uses: subosito/flutter-action@v2
       with:
