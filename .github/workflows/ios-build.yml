@@ -25,10 +25,36 @@ jobs:
       - name: Analyze code
         run: flutter analyze
 
+      - name: Build iOS app
+        run: |
+          flutter build ios --release --no-codesign
+          
+      - name: Create IPA
+        run: |
+          cd ios
+          xcodebuild -workspace Runner.xcworkspace \
+            -scheme Runner \
+            -configuration Release \
+            -destination generic/platform=iOS \
+            -archivePath build/Runner.xcarchive \
+            archive
+          
+          xcodebuild -exportArchive \
+            -archivePath build/Runner.xcarchive \
+            -exportPath build \
+            -exportOptionsPlist ExportOptions.plist
+            
+      - name: Upload IPA as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-app
+          path: ios/build/*.ipa
+          retention-days: 30
+
       - name: Notify build completion
         if: success()
-        run: echo "Basic Flutter workflow completed successfully!"
+        run: echo "iOS IPA build completed successfully! Check artifacts to download."
 
       - name: Notify build failure
         if: failure()
-        run: echo "Basic Flutter workflow failed!"
+        run: echo "iOS IPA build failed!"
