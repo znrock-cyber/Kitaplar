@@ -1,5 +1,5 @@
-name: gizli_kitap
-description: Gizli Kitap - Kitap önerileri ve gizli içerikler uygulaması
+name: kitap_onerileri
+description: Kitap Önerileri - En iyi kitap önerileri ve özel içerikler uygulaması
 version: 1.0.0+1
 
 environment:
@@ -20,3 +20,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/

@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/foundation.dart';
-import 'dart:io';
 import 'privacy_policy_screen.dart';
 import 'license_screen.dart';
 import 'secret_screen.dart';
@@ -261,7 +257,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                           width: 40,
                           height: 60,
                           decoration: BoxDecoration(
-                            color: book['color'].withOpacity(0.8),
+                            color: book['color'].withValues(alpha: 0.8),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Icon(
@@ -497,7 +493,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                   _searchQuery = value;
                 });
                 
-                // Gizli kod kontrolü
+                // Özel kod kontrolü
                 if (value == '1234') {
                   Navigator.push(
                     context,
@@ -629,13 +625,13 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              book['color'].withOpacity(0.8),
-              book['color'].withOpacity(0.6),
+              book['color'].withValues(alpha: 0.8),
+                        book['color'].withValues(alpha: 0.6),
             ],
           ),
           boxShadow: [
             BoxShadow(
-              color: book['color'].withOpacity(0.3),
+              color: book['color'].withValues(alpha: 0.3),
               blurRadius: 8,
               offset: Offset(0, 4),
             ),
@@ -653,7 +649,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: Colors.white.withOpacity(0.1),
+                    color: Colors.white.withValues(alpha: 0.1),
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
@@ -664,7 +660,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                             errorBuilder: (context, error, stackTrace) {
                               return Container(
                                 decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.2),
+                                  color: Colors.white.withValues(alpha: 0.2),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Icon(
@@ -677,7 +673,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                           )
                         : Container(
                             decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.2),
+                              color: Colors.white.withValues(alpha: 0.2),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Icon(
@@ -710,7 +706,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                     Text(
                       book['author'],
                       style: TextStyle(
-                        color: Colors.white.withOpacity(0.8),
+                        color: Colors.white.withValues(alpha: 0.8),
                         fontSize: 11,
                       ),
                       maxLines: 1,
@@ -737,7 +733,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                          Container(
                            padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                            decoration: BoxDecoration(
-                             color: Colors.white.withOpacity(0.2),
+                             color: Colors.white.withValues(alpha: 0.2),
                              borderRadius: BorderRadius.circular(8),
                            ),
                            child: Text(
@@ -792,7 +788,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                     end: Alignment.bottomRight,
                     colors: [
                       widget.book['color'],
-                      widget.book['color'].withOpacity(0.7),
+                      widget.book['color'].withValues(alpha: 0.7),
                     ],
                   ),
                 ),
@@ -804,11 +800,11 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                         width: 120,
                         height: 160,
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.2),
+                          color: Colors.white.withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.3),
+                              color: Colors.black.withValues(alpha: 0.3),
                               blurRadius: 10,
                               offset: Offset(0, 5),
                             ),
@@ -834,7 +830,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                       Text(
                         widget.book['author'],
                         style: TextStyle(
-                          color: Colors.white.withOpacity(0.8),
+                          color: Colors.white.withValues(alpha: 0.8),
                           fontSize: 16,
                         ),
                       ),
@@ -877,7 +873,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                         decoration: BoxDecoration(
-                          color: widget.book['color'].withOpacity(0.2),
+                          color: widget.book['color'].withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Text(
@@ -1240,7 +1236,7 @@ class BookSearchDelegate extends SearchDelegate<String> {
               width: 40,
               height: 60,
               decoration: BoxDecoration(
-                color: book['color'].withOpacity(0.8),
+                color: book['color'].withValues(alpha: 0.8),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(

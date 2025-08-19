@@ -59,7 +59,7 @@ class LicenseScreen extends StatelessWidget {
                   const SizedBox(height: 10),
                   const Center(
                     child: Text(
-                      'Copyright © 2025 Gizli Kitap Uygulaması',
+                      'Copyright © 2025 Kitap Önerileri Uygulaması',
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.white70,
@@ -90,7 +90,7 @@ class LicenseScreen extends StatelessWidget {
                   ),
                   _buildSection(
                     'Marka Tescili',
-                    '"Gizli Kitap" tescilli bir markadır. Bu markanın kullanımı marka sahibinden açık izin gerektirir.',
+                    '"Kitap Önerileri" tescilli bir markadır. Bu markanın kullanımı marka sahibinden açık izin gerektirir.',
                     Icons.copyright,
                   ),
                   _buildSection(
@@ -100,14 +100,14 @@ class LicenseScreen extends StatelessWidget {
                   ),
                   _buildSection(
                     'İletişim',
-                    'Lisanslama sorguları, patent bilgileri veya ticari kullanım izinleri için:\nE-posta: legal@gizlikitap.com',
+                    'Lisanslama sorguları, patent bilgileri veya ticari kullanım izinleri için:\nE-posta: legal@kitaponerileri.com',
                     Icons.contact_mail,
                   ),
                   const SizedBox(height: 30),
                   Container(
                     padding: const EdgeInsets.all(15),
                     decoration: BoxDecoration(
-                      color: Colors.amber.withOpacity(0.1),
+                      color: Colors.amber.withValues(alpha: 0.1),
                       border: Border.all(color: Colors.amber),
                       borderRadius: BorderRadius.circular(10),
                     ),

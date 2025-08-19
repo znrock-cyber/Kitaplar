@@ -1,6 +1,6 @@
 {
-    "name": "gizli_kitap_temp",
-    "short_name": "gizli_kitap_temp",
+    "name": "kitap_onerileri",
+  "short_name": "kitap_onerileri",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

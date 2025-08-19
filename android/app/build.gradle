@@ -28,7 +28,7 @@ plugins {
 }
 
 android {
-    namespace "com.gizlikitap.app"
+    namespace "com.kitaponerileri.app"
     compileSdkVersion 34
     ndkVersion "25.1.8937393"
 
@@ -46,7 +46,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.gizlikitap.app"
+        applicationId "com.kitaponerileri.app"
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion 34
         versionCode flutterVersionCode.toInteger()

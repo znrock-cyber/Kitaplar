@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'book_home_screen.dart';
 
 class SecretScreen extends StatefulWidget {
@@ -205,7 +204,7 @@ class _SecretScreenState extends State<SecretScreen> with TickerProviderStateMix
       navigationBar: CupertinoNavigationBar(
         backgroundColor: Colors.black,
         middle: Text(
-          'Gizli Bölüm',
+          'Özel Bölüm',
           style: TextStyle(color: Colors.white),
         ),
         leading: CupertinoButton(

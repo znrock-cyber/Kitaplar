@@ -1,0 +1,55 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2E5BBA;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bookGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5F5F5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E0E0E0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="spineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#A0522D;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="512" cy="512" r="480" fill="url(#bgGradient)" stroke="#1E3A8A" stroke-width="8"/>
+  
+  <!-- Book base -->
+  <rect x="300" y="250" width="424" height="524" rx="20" ry="20" fill="url(#bookGradient)" stroke="#CCCCCC" stroke-width="3"/>
+  
+  <!-- Book spine -->
+  <rect x="300" y="250" width="60" height="524" rx="20" ry="20" fill="url(#spineGradient)"/>
+  
+  <!-- Book pages effect -->
+  <rect x="370" y="270" width="340" height="484" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="2"/>
+  <rect x="375" y="275" width="330" height="474" fill="#FAFAFA"/>
+  
+  <!-- Book title area -->
+  <rect x="390" y="320" width="290" height="80" fill="#4A90E2" rx="8" ry="8"/>
+  
+  <!-- Title text -->
+  <text x="535" y="350" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="28" font-weight="bold">KİTAP</text>
+  <text x="535" y="380" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="24">ÖNERİLERİ</text>
+  
+  <!-- Decorative lines (pages) -->
+  <line x1="390" y1="450" x2="670" y2="450" stroke="#E0E0E0" stroke-width="2"/>
+  <line x1="390" y1="480" x2="650" y2="480" stroke="#E0E0E0" stroke-width="2"/>
+  <line x1="390" y1="510" x2="660" y2="510" stroke="#E0E0E0" stroke-width="2"/>
+  <line x1="390" y1="540" x2="640" y2="540" stroke="#E0E0E0" stroke-width="2"/>
+  <line x1="390" y1="570" x2="655" y2="570" stroke="#E0E0E0" stroke-width="2"/>
+  <line x1="390" y1="600" x2="645" y2="600" stroke="#E0E0E0" stroke-width="2"/>
+  <line x1="390" y1="630" x2="665" y2="630" stroke="#E0E0E0" stroke-width="2"/>
+  <line x1="390" y1="660" x2="635" y2="660" stroke="#E0E0E0" stroke-width="2"/>
+  <line x1="390" y1="690" x2="650" y2="690" stroke="#E0E0E0" stroke-width="2"/>
+  
+  <!-- Bookmark -->
+  <rect x="600" y="250" width="20" height="120" fill="#E74C3C"/>
+  <polygon points="600,370 610,350 620,370" fill="#E74C3C"/>
+  
+  <!-- Shine effect -->
+  <ellipse cx="450" cy="350" rx="80" ry="40" fill="rgba(255,255,255,0.3)" transform="rotate(-20 450 350)"/>
+</svg>

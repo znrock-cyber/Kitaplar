@@ -69,7 +69,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
                   const SizedBox(height: 30),
                   _buildSection(
                     'Giriş',
-                    'Bu gizlilik politikası, "Gizli Kitap" mobil uygulamasının kullanıcılarının kişisel verilerinin nasıl toplandığı, kullanıldığı ve korunduğu hakkında bilgi vermektedir.',
+                    'Bu gizlilik politikası, "Kitap Önerileri" mobil uygulamasının kullanıcılarının kişisel verilerinin nasıl toplandığı, kullanıldığı ve korunduğu hakkında bilgi vermektedir.',
                   ),
                   _buildSection(
                     'Toplanan Bilgiler',
@@ -93,7 +93,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
                   ),
                   _buildSection(
                     'İletişim',
-                    'Gizlilik politikası hakkında sorularınız için:\nE-posta: privacy@gizlikitap.com',
+                    'Gizlilik politikası hakkında sorularınız için:\nE-posta: privacy@kitaponerileri.com',
                   ),
                   const SizedBox(height: 30),
                   Center(

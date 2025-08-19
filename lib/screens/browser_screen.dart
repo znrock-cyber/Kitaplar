@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
@@ -82,13 +81,7 @@ class _BrowserScreenState extends State<BrowserScreen> {
     await prefs.setStringList('browser_history', _history);
   }
 
-  void _loadHistory() async {
-    final prefs = await SharedPreferences.getInstance();
-    final history = prefs.getStringList('browser_history') ?? [];
-    setState(() {
-      _history = history;
-    });
-  }
+
 
   void _saveBookmarks() async {
     final prefs = await SharedPreferences.getInstance();
