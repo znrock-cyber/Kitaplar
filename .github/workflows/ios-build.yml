@@ -18,22 +18,16 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-
-      - name: Accept Xcode license
-        run: sudo xcodebuild -license accept
-
-      - name: Check Flutter doctor
-        run: flutter doctor -v
+          flutter-version: '3.24.0'
 
       - name: Get dependencies
         run: flutter pub get
 
-      - name: Clean build
-        run: flutter clean
+      - name: Check Flutter doctor
+        run: flutter doctor
 
-      - name: Build iOS app (no codesign)
-        run: |
-          flutter build ios --release --no-codesign
+      - name: Build iOS (debug mode)
+        run: flutter build ios --debug --no-codesign
 
       - name: Notify build completion
         if: success()
