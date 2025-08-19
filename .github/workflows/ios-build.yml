@@ -1,4 +1,4 @@
-name: Build iOS App
+name: iOS Build
 
 on:
   push:
@@ -9,120 +9,87 @@ permissions:
   contents: write
 
 jobs:
-  build-ios:
-    runs-on: macos-14
+  build:
+    name: Build iOS App
+    runs-on: macos-latest
     
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-    
-    - name: Setup Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: '3.35.1'
-        channel: 'stable'
-        cache: true
-    
-    - name: Flutter Doctor
-      run: flutter doctor -v
-    
-    - name: Clean Flutter Cache
-      run: |
-        flutter clean
-        flutter pub cache clean
-        flutter pub get
-    
-    - name: Run Flutter tests
-      run: flutter test
-      continue-on-error: true
-    
-    - name: Setup Xcode
-      uses: maxim-lobanov/setup-xcode@v1
-      with:
-        xcode-version: latest-stable
-    
-    - name: Clean iOS Build Directory
-      run: |
-        cd ios
-        rm -rf build/
-        rm -rf Pods/
-        rm -rf Podfile.lock
-        rm -rf .symlinks/
-        cd ..
-    
-    - name: Install CocoaPods
-      run: |
-        sudo gem install cocoapods -N
-        pod --version
-        cd ios
-        pod install --repo-update
-        cd ..
-    
-    - name: Build iOS App
-      run: |
-        echo "Building iOS app..."
-        flutter build ios --release --no-codesign --verbose
-        echo "Creating Xcode archive..."
-        cd ios
-        xcodebuild -workspace Runner.xcworkspace \
-                   -scheme Runner \
-                   -configuration Release \
-                   -destination generic/platform=iOS \
-                   -archivePath build/Runner.xcarchive \
-                   archive \
-                   CODE_SIGNING_ALLOWED=NO
-    
-    - name: Export IPA
-      run: |
-        echo "Exporting IPA..."
-        cd ios
-        xcodebuild -exportArchive \
-                   -archivePath build/Runner.xcarchive \
-                   -exportOptionsPlist ExportOptions.plist \
-                   -exportPath build/ \
-                   -allowProvisioningUpdates
-    
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: ios-build-artifacts
-        path: |
-          ios/build/Runner.ipa
-          ios/build/Runner.xcarchive
-        retention-days: 30
-    
-    - name: Create Release
-      if: success()
-      uses: softprops/action-gh-release@v1
-      with:
-        tag_name: v1.0.${{ github.run_number }}
-        name: iOS Build v1.0.${{ github.run_number }}
-        body: |
-          🚀 iOS uygulama build'i tamamlandı!
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.1'
+          channel: 'stable'
+          cache: true
           
-          📱 **Kurulum:**
-          - AltStore veya Sideloadly ile kurabilirsiniz
-          - Ücretsiz Apple Developer hesabı yeterli
+      - name: Flutter version
+        run: flutter --version
+        
+      - name: Install dependencies
+        run: flutter pub get
+        
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
           
-          🔗 **IPA Dosyası:** Aşağıdaki Assets'ten indirin
-        files: ios/build/Runner.ipa
-        draft: false
-        prerelease: false
-    
-    - name: Notify build completion
-      if: success()
-      run: |
-        echo "✅ iOS build başarıyla tamamlandı!"
-        echo "📱 IPA dosyası GitHub Releases'a yüklendi"
-        echo "🔗 AltStore veya Sideloadly ile ücretsiz kurulum yapabilirsiniz"
-    
-    - name: Notify build failure
-      if: failure()
-      run: |
-        echo "❌ iOS build başarısız oldu!"
-        echo "📋 Yukarıdaki logları kontrol edin"
-        echo "🔧 Olası sorunlar: bağımlılıklar, build konfigürasyonu veya Xcode kurulumu"
+      - name: Install CocoaPods
+        run: |
+          gem install cocoapods
+          pod --version
+          
+      - name: Clean build
+        run: |
+          flutter clean
+          cd ios
+          rm -rf Pods
+          rm -rf Podfile.lock
+          rm -rf .symlinks
+          cd ..
+          
+      - name: Install Pod dependencies
+        run: |
+          cd ios
+          pod install
+          cd ..
+          
+      - name: Build iOS (no codesign)
+        run: flutter build ios --release --no-codesign
+        
+      - name: Create IPA
+        run: |
+          cd ios
+          mkdir -p build/Runner
+          cp -r build/ios/iphoneos/Runner.app build/Runner/
+          cd build
+          zip -r Runner.ipa Runner
+          cd ../..
+          
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-build
+          path: ios/build/Runner.ipa
+          retention-days: 7
+          
+      - name: Create Release
+        if: success()
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v1.0.${{ github.run_number }}
+          name: iOS Build v1.0.${{ github.run_number }}
+          body: |
+            🚀 iOS uygulama build'i tamamlandı!
+            
+            📱 **Kurulum:**
+            - AltStore veya Sideloadly ile kurabilirsiniz
+            - Ücretsiz Apple Developer hesabı yeterli
+          files: ios/build/Runner.ipa
+          draft: false
+          prerelease: false
     - name: Setup Flutter
       uses: subosito/flutter-action@v2
       with:
