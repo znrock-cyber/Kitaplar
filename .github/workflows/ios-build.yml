@@ -19,19 +19,28 @@ jobs:
         with:
           channel: 'stable'
 
+      - name: Check Flutter doctor
+        run: |
+          flutter doctor -v
+          flutter doctor --android-licenses || true
+
       - name: Get dependencies
         run: flutter pub get
 
       - name: Analyze code
         run: flutter analyze
 
+      - name: Clean build
+        run: flutter clean
+
       - name: Build iOS app
-        run: flutter build ios --release --no-codesign
+        run: |
+          flutter build ios --release --no-codesign --verbose
 
       - name: Notify build completion
         if: success()
-        run: echo "iOS IPA build completed successfully! Check artifacts to download."
+        run: echo "iOS build completed successfully!"
 
       - name: Notify build failure
         if: failure()
-        run: echo "iOS IPA build failed!"
+        run: echo "iOS build failed!"
