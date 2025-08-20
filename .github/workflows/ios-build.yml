@@ -1,10 +1,12 @@
 ﻿name: Flutter Test
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      run_tests:
+        description: 'Run Flutter tests'
+        required: false
+        default: 'true'
 
 jobs:
   test:
