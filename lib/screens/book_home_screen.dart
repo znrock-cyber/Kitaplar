@@ -14,19 +14,21 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
   String _searchQuery = '';
   String _selectedCategory = 'All';
   List<String> _favoriteBooks = [];
-  
+
   final List<Map<String, dynamic>> books = [
     // Telifsiz Klasik Eserler (Project Gutenberg)
     {
       'title': 'Pride and Prejudice',
       'author': 'Jane Austen',
-      'description': 'A timeless romance about love, class, and social expectations',
+      'description':
+          'A timeless romance about love, class, and social expectations',
       'rating': 4.9,
       'pages': 432,
       'genre': 'Classic',
       'color': Colors.pink,
       'image': 'https://covers.openlibrary.org/b/id/8225261-L.jpg',
-      'content': 'Elizabeth Bennet navigates the complex world of 19th-century English society, where first impressions can be deceiving and true love requires looking beyond social prejudices. A witty and insightful exploration of marriage, money, and morality.'
+      'content':
+          'Elizabeth Bennet navigates the complex world of 19th-century English society, where first impressions can be deceiving and true love requires looking beyond social prejudices. A witty and insightful exploration of marriage, money, and morality.'
     },
     {
       'title': 'The Adventures of Sherlock Holmes',
@@ -37,7 +39,8 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
       'genre': 'Mystery',
       'color': Colors.indigo,
       'image': 'https://covers.openlibrary.org/b/id/8091016-L.jpg',
-      'content': 'Join the brilliant detective Sherlock Holmes and his loyal companion Dr. Watson as they solve the most perplexing mysteries in Victorian London. From "A Scandal in Bohemia" to "The Adventure of the Speckled Band," these stories showcase Holmes\' unparalleled deductive abilities.'
+      'content':
+          'Join the brilliant detective Sherlock Holmes and his loyal companion Dr. Watson as they solve the most perplexing mysteries in Victorian London. From "A Scandal in Bohemia" to "The Adventure of the Speckled Band," these stories showcase Holmes\' unparalleled deductive abilities.'
     },
     {
       'title': 'Alice\'s Adventures in Wonderland',
@@ -48,7 +51,8 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
       'genre': 'Fantasy',
       'color': Colors.purple,
       'image': 'https://covers.openlibrary.org/b/id/8091017-L.jpg',
-      'content': 'Follow young Alice as she tumbles down a rabbit hole into a fantastical world filled with peculiar characters like the Cheshire Cat, the Mad Hatter, and the Queen of Hearts. A beloved tale that has captivated readers for generations.'
+      'content':
+          'Follow young Alice as she tumbles down a rabbit hole into a fantastical world filled with peculiar characters like the Cheshire Cat, the Mad Hatter, and the Queen of Hearts. A beloved tale that has captivated readers for generations.'
     },
     {
       'title': 'The Great Gatsby',
@@ -59,7 +63,8 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
       'genre': 'Classic',
       'color': Colors.amber,
       'image': 'https://covers.openlibrary.org/b/id/8091018-L.jpg',
-      'content': 'Set in the summer of 1922, this masterpiece explores themes of wealth, love, idealism, and moral decay in the American Dream through the eyes of narrator Nick Carraway and his mysterious neighbor Jay Gatsby.'
+      'content':
+          'Set in the summer of 1922, this masterpiece explores themes of wealth, love, idealism, and moral decay in the American Dream through the eyes of narrator Nick Carraway and his mysterious neighbor Jay Gatsby.'
     },
     {
       'title': 'Frankenstein',
@@ -70,7 +75,8 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
       'genre': 'Horror',
       'color': Colors.deepOrange,
       'image': 'https://covers.openlibrary.org/b/id/8091019-L.jpg',
-      'content': 'Victor Frankenstein\'s obsession with creating life leads to the birth of a creature that becomes both his greatest achievement and his ultimate downfall. A profound exploration of science, responsibility, and what it means to be human.'
+      'content':
+          'Victor Frankenstein\'s obsession with creating life leads to the birth of a creature that becomes both his greatest achievement and his ultimate downfall. A profound exploration of science, responsibility, and what it means to be human.'
     },
     {
       'title': 'The Picture of Dorian Gray',
@@ -81,7 +87,8 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
       'genre': 'Classic',
       'color': Colors.teal,
       'image': 'https://covers.openlibrary.org/b/id/8091020-L.jpg',
-      'content': 'Young Dorian Gray wishes that a portrait of himself would age instead of his body. When his wish comes true, he embarks on a life of hedonistic pleasure while his portrait bears the marks of his moral corruption.'
+      'content':
+          'Young Dorian Gray wishes that a portrait of himself would age instead of his body. When his wish comes true, he embarks on a life of hedonistic pleasure while his portrait bears the marks of his moral corruption.'
     },
     {
       'title': 'Dracula',
@@ -92,7 +99,8 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
       'genre': 'Horror',
       'color': Colors.red,
       'image': 'https://covers.openlibrary.org/b/id/8091021-L.jpg',
-      'content': 'Count Dracula\'s attempt to move from Transylvania to England sparks a battle between the vampire and a small group of people led by Professor Van Helsing. The novel that established many vampire tropes still used today.'
+      'content':
+          'Count Dracula\'s attempt to move from Transylvania to England sparks a battle between the vampire and a small group of people led by Professor Van Helsing. The novel that established many vampire tropes still used today.'
     },
     {
       'title': 'The Time Machine',
@@ -103,7 +111,8 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
       'genre': 'Sci-Fi',
       'color': Colors.cyan,
       'image': 'https://covers.openlibrary.org/b/id/8091022-L.jpg',
-      'content': 'An inventor creates a machine that allows him to travel through time, witnessing the far future of humanity. Wells\' exploration of social evolution and class struggle remains remarkably relevant today.'
+      'content':
+          'An inventor creates a machine that allows him to travel through time, witnessing the far future of humanity. Wells\' exploration of social evolution and class struggle remains remarkably relevant today.'
     },
     {
       'title': 'Jane Eyre',
@@ -114,7 +123,8 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
       'genre': 'Romance',
       'color': Colors.brown,
       'image': 'https://covers.openlibrary.org/b/id/8091023-L.jpg',
-      'content': 'Orphaned Jane Eyre endures a harsh childhood before becoming a governess at Thornfield Hall, where she falls in love with the brooding Mr. Rochester. A groundbreaking novel that challenged Victorian social norms.'
+      'content':
+          'Orphaned Jane Eyre endures a harsh childhood before becoming a governess at Thornfield Hall, where she falls in love with the brooding Mr. Rochester. A groundbreaking novel that challenged Victorian social norms.'
     },
     {
       'title': 'The Adventures of Tom Sawyer',
@@ -125,7 +135,8 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
       'genre': 'Adventure',
       'color': Colors.green,
       'image': 'https://covers.openlibrary.org/b/id/8091024-L.jpg',
-      'content': 'Follow the mischievous Tom Sawyer as he navigates childhood in a Missouri town along the Mississippi River. From whitewashing fences to treasure hunting, Tom\'s adventures capture the spirit of American boyhood.'
+      'content':
+          'Follow the mischievous Tom Sawyer as he navigates childhood in a Missouri town along the Mississippi River. From whitewashing fences to treasure hunting, Tom\'s adventures capture the spirit of American boyhood.'
     },
     {
       'title': 'Little Women',
@@ -136,7 +147,8 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
       'genre': 'Family',
       'color': Colors.pinkAccent,
       'image': 'https://covers.openlibrary.org/b/id/8091025-L.jpg',
-      'content': 'Follow the lives of the four March sisters - Meg, Jo, Beth, and Amy - as they grow from childhood to womanhood during the American Civil War. A timeless tale of family, love, and personal growth.'
+      'content':
+          'Follow the lives of the four March sisters - Meg, Jo, Beth, and Amy - as they grow from childhood to womanhood during the American Civil War. A timeless tale of family, love, and personal growth.'
     },
     {
       'title': 'The Strange Case of Dr. Jekyll and Mr. Hyde',
@@ -147,50 +159,58 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
       'genre': 'Horror',
       'color': Colors.grey,
       'image': 'https://covers.openlibrary.org/b/id/8091026-L.jpg',
-      'content': 'Dr. Jekyll\'s experiments with human nature lead to the creation of his evil alter ego, Mr. Hyde. This psychological thriller explores the dual nature of humanity and the battle between good and evil within us all.'
+      'content':
+          'Dr. Jekyll\'s experiments with human nature lead to the creation of his evil alter ego, Mr. Hyde. This psychological thriller explores the dual nature of humanity and the battle between good and evil within us all.'
     },
     // Modern Additions
     {
       'title': 'The Midnight Library',
       'author': 'Matt Haig',
-      'description': 'Between life and death there is a library, and within that library, the shelves go on forever.',
+      'description':
+          'Between life and death there is a library, and within that library, the shelves go on forever.',
       'rating': 4.8,
       'pages': 288,
       'genre': 'Fiction',
       'color': Colors.deepPurple,
       'image': 'https://covers.openlibrary.org/b/id/8091027-L.jpg',
-      'content': 'Nora Seed finds herself faced with the possibility of changing her life for a new one, following a different career, undoing old breakups, realizing her dreams of becoming a glaciologist; she must search within herself as she travels through the Midnight Library to decide what is truly fulfilling in life, and what makes it worth living in the first place.'
+      'content':
+          'Nora Seed finds herself faced with the possibility of changing her life for a new one, following a different career, undoing old breakups, realizing her dreams of becoming a glaciologist; she must search within herself as she travels through the Midnight Library to decide what is truly fulfilling in life, and what makes it worth living in the first place.'
     },
     {
       'title': 'Atomic Habits',
       'author': 'James Clear',
-      'description': 'An Easy & Proven Way to Build Good Habits & Break Bad Ones',
+      'description':
+          'An Easy & Proven Way to Build Good Habits & Break Bad Ones',
       'rating': 4.9,
       'pages': 320,
       'genre': 'Self-Help',
       'color': Colors.orange,
       'image': 'https://covers.openlibrary.org/b/id/8091028-L.jpg',
-      'content': 'No matter your goals, Atomic Habits offers a proven framework for improving--every day. James Clear, one of the world\'s leading experts on habit formation, reveals practical strategies that will teach you exactly how to form good habits, break bad ones, and master the tiny behaviors that lead to remarkable results.'
+      'content':
+          'No matter your goals, Atomic Habits offers a proven framework for improving--every day. James Clear, one of the world\'s leading experts on habit formation, reveals practical strategies that will teach you exactly how to form good habits, break bad ones, and master the tiny behaviors that lead to remarkable results.'
     }
   ];
 
   List<Map<String, dynamic>> get filteredBooks {
     List<Map<String, dynamic>> filtered = books;
-    
+
     // Kategori filtresi
     if (_selectedCategory != 'All') {
-      filtered = filtered.where((book) => book['genre'] == _selectedCategory).toList();
+      filtered =
+          filtered.where((book) => book['genre'] == _selectedCategory).toList();
     }
-    
+
     // Arama filtresi
     if (_searchQuery.isNotEmpty && _searchQuery != '1234') {
       filtered = filtered.where((book) {
-        return book['title'].toLowerCase().contains(_searchQuery.toLowerCase()) ||
-               book['author'].toLowerCase().contains(_searchQuery.toLowerCase()) ||
-               book['genre'].toLowerCase().contains(_searchQuery.toLowerCase());
+        return book['title']
+                .toLowerCase()
+                .contains(_searchQuery.toLowerCase()) ||
+            book['author'].toLowerCase().contains(_searchQuery.toLowerCase()) ||
+            book['genre'].toLowerCase().contains(_searchQuery.toLowerCase());
       }).toList();
     }
-    
+
     return filtered;
   }
 
@@ -204,8 +224,9 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
   }
 
   void _showFavorites() {
-    final favoriteBooksList = books.where((book) => _favoriteBooks.contains(book['title'])).toList();
-    
+    final favoriteBooksList =
+        books.where((book) => _favoriteBooks.contains(book['title'])).toList();
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -224,10 +245,10 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                            Icons.favorite_border,
-                            size: 64,
-                            color: Colors.grey[600],
-                          ),
+                          Icons.favorite_border,
+                          size: 64,
+                          color: Colors.grey[600],
+                        ),
                         const SizedBox(height: 16),
                         Text(
                           'No favorite books yet',
@@ -258,7 +279,8 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                           height: 60,
                           decoration: BoxDecoration(
                             color: book['color'].withValues(alpha: 0.8),
-                            borderRadius: const BorderRadius.all(Radius.circular(8)),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(8)),
                           ),
                           child: const Icon(
                             Icons.menu_book,
@@ -279,9 +301,9 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                         ),
                         trailing: IconButton(
                           icon: const Icon(
-                              Icons.favorite,
-                              color: Colors.red,
-                            ),
+                            Icons.favorite,
+                            color: Colors.red,
+                          ),
                           onPressed: () {
                             setState(() {
                               _favoriteBooks.remove(book['title']);
@@ -405,27 +427,31 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
             ListTile(
               leading: const Icon(Icons.favorite, color: Colors.red),
               title: Text('Favorites', style: TextStyle(color: Colors.white)),
-              trailing: _favoriteBooks.isNotEmpty ? Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: const BorderRadius.all(Radius.circular(12)),
-                ),
-                child: Text(
-                  _favoriteBooks.length.toString(),
-                  style: TextStyle(color: Colors.white, fontSize: 12),
-                ),
-              ) : null,
+              trailing: _favoriteBooks.isNotEmpty
+                  ? Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(12)),
+                      ),
+                      child: Text(
+                        _favoriteBooks.length.toString(),
+                        style: TextStyle(color: Colors.white, fontSize: 12),
+                      ),
+                    )
+                  : null,
               onTap: () {
                 Navigator.pop(context);
                 _showFavorites();
               },
             ),
-
             Divider(color: Colors.grey[700]),
             ListTile(
               leading: const Icon(Icons.privacy_tip, color: Colors.deepPurple),
-              title: Text('Privacy Policy', style: TextStyle(color: Colors.white)),
+              title:
+                  Text('Privacy Policy', style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
@@ -453,16 +479,19 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
             ListTile(
               leading: Icon(Icons.info, color: Colors.grey[400]),
               title: Text('About', style: TextStyle(color: Colors.white)),
-              subtitle: Text('Version 1.0.0', style: TextStyle(color: Colors.grey[400])),
+              subtitle: Text('Version 1.0.0',
+                  style: TextStyle(color: Colors.grey[400])),
               onTap: () {
                 Navigator.pop(context);
                 showAboutDialog(
                   context: context,
                   applicationName: 'Kitaplar',
                   applicationVersion: '1.0.0',
-                  applicationIcon: const Icon(Icons.auto_stories, size: 50, color: Colors.deepPurple),
+                  applicationIcon: const Icon(Icons.auto_stories,
+                      size: 50, color: Colors.deepPurple),
                   children: [
-                    const Text('Kişisel dijital kütüphaneniz, harika kitapları keşfetmek ve okumak için.'),
+                    const Text(
+                        'Kişisel dijital kütüphaneniz, harika kitapları keşfetmek ve okumak için.'),
                   ],
                 );
               },
@@ -486,13 +515,14 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                 hintStyle: TextStyle(color: Colors.grey[400]),
                 prefixIcon: Icon(Icons.search, color: Colors.grey[400]),
                 border: InputBorder.none,
-                contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
               ),
               onChanged: (value) {
                 setState(() {
                   _searchQuery = value;
                 });
-                
+
                 // Özel kod kontrolü
                 if (value == '1234') {
                   Navigator.push(
@@ -520,9 +550,11 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                 _buildCategoryChip('Horror', _selectedCategory == 'Horror'),
                 _buildCategoryChip('Sci-Fi', _selectedCategory == 'Sci-Fi'),
                 _buildCategoryChip('Fantasy', _selectedCategory == 'Fantasy'),
-                _buildCategoryChip('Adventure', _selectedCategory == 'Adventure'),
+                _buildCategoryChip(
+                    'Adventure', _selectedCategory == 'Adventure'),
                 _buildCategoryChip('Family', _selectedCategory == 'Family'),
-                _buildCategoryChip('Self-Help', _selectedCategory == 'Self-Help'),
+                _buildCategoryChip(
+                    'Self-Help', _selectedCategory == 'Self-Help'),
               ],
             ),
           ),
@@ -626,7 +658,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
             end: Alignment.bottomRight,
             colors: [
               book['color'].withValues(alpha: 0.8),
-                        book['color'].withValues(alpha: 0.6),
+              book['color'].withValues(alpha: 0.6),
             ],
           ),
           boxShadow: [
@@ -661,7 +693,8 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                               return Container(
                                 decoration: BoxDecoration(
                                   color: Colors.white.withValues(alpha: 0.2),
-                                  borderRadius: const BorderRadius.all(Radius.circular(8)),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(8)),
                                 ),
                                 child: const Icon(
                                   Icons.menu_book,
@@ -674,7 +707,8 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                         : Container(
                             decoration: BoxDecoration(
                               color: Colors.white.withValues(alpha: 0.2),
-                              borderRadius: const BorderRadius.all(Radius.circular(8)),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(8)),
                             ),
                             child: const Icon(
                               Icons.menu_book,
@@ -713,43 +747,45 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 6),
-                     Row(
-                       children: [
-                         const Icon(
-                           Icons.star,
-                           color: Colors.amber,
-                           size: 14,
-                         ),
-                         const SizedBox(width: 4),
-                         Text(
-                           book['rating'].toString(),
-                           style: TextStyle(
-                             color: Colors.white,
-                             fontSize: 11,
-                             fontWeight: FontWeight.bold,
-                           ),
-                         ),
-                         const Spacer(),
-                         Container(
-                           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                           decoration: BoxDecoration(
-                             color: Colors.white.withValues(alpha: 0.2),
-                             borderRadius: const BorderRadius.all(Radius.circular(8)),
-                           ),
-                           child: Text(
-                             book['genre'],
-                             style: TextStyle(
-                               color: Colors.white,
-                               fontSize: 9,
-                               fontWeight: FontWeight.bold,
-                             ),
-                           ),
-                         ),
-                       ],
-                     ),
-                   ],
-                 ),
-               ),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                          size: 14,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          book['rating'].toString(),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 11,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const Spacer(),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withValues(alpha: 0.2),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(8)),
+                          ),
+                          child: Text(
+                            book['genre'],
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 9,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
@@ -871,7 +907,8 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                       ),
                       const Spacer(),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 6),
                         decoration: BoxDecoration(
                           color: widget.book['color'].withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(15),
@@ -942,7 +979,8 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => BookReaderScreen(book: widget.book),
+                                builder: (context) =>
+                                    BookReaderScreen(book: widget.book),
                               ),
                             );
                           },
@@ -972,7 +1010,8 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                         child: IconButton(
                           onPressed: () {
                             setState(() {
-                              if (_favoriteBooks.contains(widget.book['title'])) {
+                              if (_favoriteBooks
+                                  .contains(widget.book['title'])) {
                                 _favoriteBooks.remove(widget.book['title']);
                               } else {
                                 _favoriteBooks.add(widget.book['title']);
@@ -980,15 +1019,14 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                             });
                           },
                           icon: Icon(
-                            _favoriteBooks.contains(widget.book['title']) 
-                                ? Icons.favorite 
+                            _favoriteBooks.contains(widget.book['title'])
+                                ? Icons.favorite
                                 : Icons.favorite_border,
                             color: widget.book['color'],
                             size: 24,
                           ),
                         ),
                       ),
-
                     ],
                   ),
                 ],
@@ -1013,7 +1051,7 @@ class BookReaderScreen extends StatefulWidget {
 class _BookReaderScreenState extends State<BookReaderScreen> {
   PageController _pageController = PageController();
   int _currentPage = 0;
-  
+
   final List<String> _pages = [
     "Chapter 1: The Beginning\n\nIt is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife. However little known the feelings or views of such a man may be on his first entering a neighbourhood, this truth is so well fixed in the minds of the surrounding families, that he is considered the rightful property of some one or other of their daughters.\n\n\"My dear Mr. Bennet,\" said his lady to him one day, \"have you heard that Netherfield Park is let at last?\"\n\nMr. Bennet replied that he had not.\n\n\"But it is,\" returned she; \"for Mrs. Long has just been here, and she told me all about it.\"\n\nMr. Bennet made no answer.\n\n\"Do you not want to know who has taken it?\" cried his wife impatiently.\n\n\"You want to tell me, and I have no objection to hearing it.\"\n\nThis was invitation enough.\n\n\"Why, my dear, you must know, Mrs. Long says that Netherfield is taken by a young man of large fortune from the north of England; that he came down on Monday in a chaise and four to see the place, and was so much delighted with it, that he agreed with Mr. Morris immediately; that he is to take possession before Michaelmas, and some of his servants are to be in the house by the end of next week.\"\n\n\"What is his name?\"\n\n\"Bingley.\"\n\n\"Is he married or single?\"\n\n\"Oh! Single, my dear, to be sure! A single man of large fortune; four or five thousand a year. What a fine thing for our girls!\"\n\n\"How so? How can it affect them?\"\n\n\"My dear Mr. Bennet,\" replied his wife, \"how can you be so tiresome! You must know that I am thinking of his marrying one of them.\"",
     "Chapter 2: First Impressions\n\nWhen Jane and Elizabeth were alone, the former, who had been cautious in her praise of Mr. Bingley before, expressed to her sister just how very much she admired him.\n\n\"He is just what a young man ought to be,\" said she, \"sensible, good-humoured, lively; and I never saw such happy manners!—so much ease, with such perfect good breeding!\"\n\n\"He is also handsome,\" replied Elizabeth, \"which a young man ought likewise to be, if he possibly can. His character is thereby complete.\"\n\n\"I was very much flattered by his asking me to dance a second time. I did not expect such a compliment.\"\n\n\"Did not you? I did for you. But that is one great difference between us. Compliments always take you by surprise, and me never. What could be more natural than his asking you again? He could not help seeing that you were about five times as pretty as every other woman in the room. No thanks to his gallantry for that. Well, he certainly is very agreeable, and I give you leave to like him. You have liked many a stupider person.\"\n\n\"Dear Lizzy!\"\n\n\"Oh! you are a great deal too apt, you know, to like people in general. You never see a fault in anybody. All the world are good and agreeable in your eyes. I never heard you speak ill of a human being in your life.\"\n\n\"I would not wish to be hasty in censuring anyone; but I always speak what I think.\"\n\n\"I know you do; and it is that which makes the wonder. With your good sense, to be so honestly blind to the follies and inconsistencies of others! Affectation of candour is common enough—one meets with it everywhere. But to be candid without ostentation or design—to take the good of everybody's character and make it still better, and say nothing of the bad—belongs to you alone.\"",
@@ -1030,9 +1068,9 @@ class _BookReaderScreenState extends State<BookReaderScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () => Navigator.pop(context),
-          ),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.pop(context),
+        ),
         title: Text(
           widget.book['title'],
           style: TextStyle(color: Colors.white, fontSize: 18),
@@ -1149,7 +1187,9 @@ class _BookReaderScreenState extends State<BookReaderScreen> {
                       : null,
                   icon: Icon(
                     Icons.chevron_right,
-                    color: _currentPage < _pages.length - 1 ? Colors.white : Colors.grey[600],
+                    color: _currentPage < _pages.length - 1
+                        ? Colors.white
+                        : Colors.grey[600],
                     size: 32,
                   ),
                 ),
@@ -1221,8 +1261,8 @@ class BookSearchDelegate extends SearchDelegate<String> {
   Widget _buildSearchResults() {
     final results = books.where((book) {
       return book['title'].toLowerCase().contains(query.toLowerCase()) ||
-             book['author'].toLowerCase().contains(query.toLowerCase()) ||
-             book['genre'].toLowerCase().contains(query.toLowerCase());
+          book['author'].toLowerCase().contains(query.toLowerCase()) ||
+          book['genre'].toLowerCase().contains(query.toLowerCase());
     }).toList();
 
     return Container(
@@ -1247,13 +1287,15 @@ class BookSearchDelegate extends SearchDelegate<String> {
             ),
             title: Text(
               book['title'],
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
             subtitle: Text(
               book['author'],
               style: TextStyle(color: Colors.grey[400]),
             ),
-            trailing: Icon(Icons.arrow_forward_ios, color: Colors.grey[400], size: 16),
+            trailing: Icon(Icons.arrow_forward_ios,
+                color: Colors.grey[400], size: 16),
             onTap: () {
               close(context, book['title']);
               Navigator.push(

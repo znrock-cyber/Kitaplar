@@ -388,11 +388,11 @@ class _BrowserScreenState extends State<BrowserScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(icon, size: 18),
+              Icon(icon, size: 18),
               const SizedBox(width: 6),
               Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
                 ),

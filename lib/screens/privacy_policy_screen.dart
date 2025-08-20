@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class PrivacyPolicyScreen extends StatelessWidget {
-  const PrivacyPolicyScreen({Key? key}) : super(key: key);
+  const PrivacyPolicyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +29,8 @@ class PrivacyPolicyScreen extends StatelessWidget {
           child: Card(
             elevation: 8,
             color: Colors.grey[900],
-            shape: RoundedRectangleBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(15)),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(15)),
             ),
             child: Padding(
               padding: const EdgeInsets.all(20.0),
@@ -113,8 +113,8 @@ class PrivacyPolicyScreen extends StatelessWidget {
                           horizontal: 30,
                           vertical: 15,
                         ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: const BorderRadius.all(Radius.circular(25)),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
                         ),
                         elevation: 5,
                       ),

@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'book_home_screen.dart';
 
 class SecretScreen extends StatefulWidget {
+  const SecretScreen({super.key});
+  
   @override
   _SecretScreenState createState() => _SecretScreenState();
 }
@@ -24,12 +26,12 @@ class _SecretScreenState extends State<SecretScreen> with TickerProviderStateMix
 
   void _openInstagram() {
     // Instagram açma işlemi - platform bağımsız
-    print('Instagram açılıyor...');
+    // TODO: Instagram açma işlemi implementasyonu
   }
 
   void _openWhatsApp() {
     // WhatsApp açma işlemi - platform bağımsız
-    print('WhatsApp açılıyor...');
+    // TODO: WhatsApp açma işlemi implementasyonu
   }
 
   Widget _buildInstagramIframe() {
@@ -61,8 +63,8 @@ class _SecretScreenState extends State<SecretScreen> with TickerProviderStateMix
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.pink,
                 padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: const BorderRadius.all(Radius.circular(25)),
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(25)),
                 ),
               ),
               child: const Text(
@@ -145,8 +147,8 @@ class _SecretScreenState extends State<SecretScreen> with TickerProviderStateMix
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
                 padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: const BorderRadius.all(Radius.circular(25)),
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(25)),
                 ),
               ),
               child: const Text(
