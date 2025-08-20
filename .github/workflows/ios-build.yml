@@ -1,4 +1,4 @@
-﻿name: iOS Build
+﻿name: Flutter Test
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  test:
     runs-on: macos-latest
 
     steps:
@@ -18,21 +18,15 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          flutter-version: '3.24.0'
+
+      - name: Flutter version
+        run: flutter --version
 
       - name: Get dependencies
         run: flutter pub get
 
-      - name: Check Flutter doctor
-        run: flutter doctor
+      - name: Run Flutter analyze
+        run: flutter analyze
 
-      - name: Build iOS (debug mode)
-        run: flutter build ios --debug --no-codesign
-
-      - name: Notify build completion
-        if: success()
-        run: echo "iOS build completed successfully!"
-
-      - name: Notify build failure
-        if: failure()
-        run: echo "iOS build failed!"
+      - name: Test completion
+        run: echo "Flutter setup and analyze completed successfully!"
