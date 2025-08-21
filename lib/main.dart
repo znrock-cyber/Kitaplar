@@ -5,15 +5,16 @@ import 'dart:io';
 import 'screens/book_home_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     // iOS için özel tasarım
     if (!kIsWeb && Platform.isIOS) {
-      return CupertinoApp(
+      return const CupertinoApp(
         title: 'Kitaplar',
         theme: CupertinoThemeData(
           primaryColor: CupertinoColors.systemOrange,
@@ -36,23 +37,25 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.black,
         brightness: Brightness.dark,
         fontFamily: 'Roboto',
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           backgroundColor: Colors.black,
           foregroundColor: Colors.white,
         ),
       ),
-      home: SplashScreen(),
+      home: const SplashScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  SplashScreenState createState() => SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen>
+class SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
   late AnimationController _fadeController;
   late AnimationController _scaleController;
@@ -64,12 +67,12 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
 
     _fadeController = AnimationController(
-      duration: Duration(milliseconds: 1500),
+      duration: const Duration(milliseconds: 1500),
       vsync: this,
     );
 
     _scaleController = AnimationController(
-      duration: Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 1000),
       vsync: this,
     );
 
@@ -95,25 +98,25 @@ class _SplashScreenState extends State<SplashScreen>
 
   void _startAnimations() {
     _scaleController.forward();
-    Future.delayed(Duration(milliseconds: 300), () {
+    Future.delayed(const Duration(milliseconds: 300), () {
       _fadeController.forward();
     });
   }
 
   void _loadApp() async {
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 3));
     if (mounted) {
       Navigator.of(context).pushReplacement(
         PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) =>
-              BookHomeScreen(),
+              const BookHomeScreen(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(
               opacity: animation,
               child: child,
             );
           },
-          transitionDuration: Duration(milliseconds: 800),
+          transitionDuration: const Duration(milliseconds: 800),
         ),
       );
     }
@@ -146,7 +149,7 @@ class _SplashScreenState extends State<SplashScreen>
                         width: 140,
                         height: 140,
                         decoration: BoxDecoration(
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                             colors: [
                               CupertinoColors.systemOrange,
                               CupertinoColors.systemRed,
@@ -161,11 +164,11 @@ class _SplashScreenState extends State<SplashScreen>
                               color:
                                   CupertinoColors.systemOrange.withOpacity(0.4),
                               blurRadius: 20,
-                              offset: Offset(0, 10),
+                              offset: const Offset(0, 10),
                             ),
                           ],
                         ),
-                        child: Icon(
+                        child: const Icon(
                           CupertinoIcons.book_fill,
                           size: 70,
                           color: CupertinoColors.white,
@@ -174,10 +177,10 @@ class _SplashScreenState extends State<SplashScreen>
                     );
                   },
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 FadeTransition(
                   opacity: _fadeAnimation,
-                  child: Column(
+                  child: const Column(
                     children: [
                       Text(
                         'Kitaplar',
@@ -200,10 +203,10 @@ class _SplashScreenState extends State<SplashScreen>
                     ],
                   ),
                 ),
-                SizedBox(height: 60),
+                const SizedBox(height: 60),
                 FadeTransition(
                   opacity: _fadeAnimation,
-                  child: Container(
+                  child: const SizedBox(
                     width: 40,
                     height: 40,
                     child: CupertinoActivityIndicator(
@@ -235,7 +238,7 @@ class _SplashScreenState extends State<SplashScreen>
                     width: 140,
                     height: 140,
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
+                      gradient: const LinearGradient(
                         colors: [
                           Colors.orange,
                           Colors.red,
@@ -249,11 +252,11 @@ class _SplashScreenState extends State<SplashScreen>
                         BoxShadow(
                           color: Colors.orange.withValues(alpha: 0.4),
                           blurRadius: 20,
-                          offset: Offset(0, 10),
+                          offset: const Offset(0, 10),
                         ),
                       ],
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.auto_stories,
                       size: 70,
                       color: Colors.white,
@@ -262,10 +265,10 @@ class _SplashScreenState extends State<SplashScreen>
                 );
               },
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             FadeTransition(
               opacity: _fadeAnimation,
-              child: Column(
+              child: const Column(
                 children: [
                   Text(
                     'Kitaplar',
@@ -281,17 +284,17 @@ class _SplashScreenState extends State<SplashScreen>
                     'Kitap Keşfet',
                     style: TextStyle(
                       fontSize: 16,
-                      color: Colors.grey[400],
+                      color: Colors.grey,
                       fontWeight: FontWeight.w300,
                     ),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 60),
+            const SizedBox(height: 60),
             FadeTransition(
               opacity: _fadeAnimation,
-              child: Container(
+              child: const SizedBox(
                 width: 30,
                 height: 30,
                 child: CircularProgressIndicator(

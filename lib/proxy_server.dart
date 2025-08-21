@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 
 class ProxyServer {
   static HttpServer? _server;
-  static int _port = 8081;
+  static const int _port = 8081;
 
   static Future<void> start() async {
     if (_server != null) return;
@@ -11,18 +11,18 @@ class ProxyServer {
     try {
       // Web platformunda proxy server başlatmaya gerek yok
       if (kIsWeb) {
-        print('Web platformunda proxy server simüle ediliyor');
+        if (kDebugMode) print('Web platformunda proxy server simüle ediliyor');
         return;
       }
       
       _server = await HttpServer.bind(InternetAddress.loopbackIPv4, _port);
-      print('Proxy sunucusu başlatıldı: http://localhost:$_port');
+      if (kDebugMode) print('Proxy sunucusu başlatıldı: http://localhost:$_port');
       
       await for (HttpRequest request in _server!) {
         _handleRequest(request);
       }
     } catch (e) {
-      print('Proxy sunucusu başlatılamadı: $e');
+      if (kDebugMode) print('Proxy sunucusu başlatılamadı: $e');
     }
   }
 
@@ -88,7 +88,7 @@ class ProxyServer {
       
       client.close();
     } catch (e) {
-      print('Proxy hatası: $e');
+      if (kDebugMode) print('Proxy hatası: $e');
       request.response.statusCode = 500;
       request.response.write('Proxy hatası: $e');
       await request.response.close();
@@ -99,7 +99,7 @@ class ProxyServer {
     if (_server != null) {
       await _server!.close();
       _server = null;
-      print('Proxy sunucusu durduruldu');
+      if (kDebugMode) print('Proxy sunucusu durduruldu');
     }
   }
 

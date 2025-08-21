@@ -6,7 +6,7 @@ import 'package:kitap_onerileri/main.dart';
 void main() {
   testWidgets('App loads without crashing', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+    await tester.pumpWidget(const MyApp());
     
     // Wait for all animations and timers to complete
     await tester.pumpAndSettle(const Duration(seconds: 5));

@@ -5,6 +5,8 @@ import 'secret_screen.dart';
 import 'browser_screen.dart';
 
 class BookHomeScreen extends StatefulWidget {
+  const BookHomeScreen({super.key});
+
   @override
   State<BookHomeScreen> createState() => _BookHomeScreenState();
 }
@@ -236,7 +238,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
             'Favorite Books',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
-          content: Container(
+          content: SizedBox(
             width: double.maxFinite,
             height: 400,
             child: favoriteBooksList.isEmpty
