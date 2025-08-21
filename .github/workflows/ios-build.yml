@@ -1,15 +1,19 @@
-﻿name: Flutter Test
+﻿name: iOS Build
 
 on:
   workflow_dispatch:
     inputs:
-      run_tests:
-        description: 'Run Flutter tests'
+      build_type:
+        description: 'Build type'
         required: false
-        default: 'true'
+        default: 'release'
+        type: choice
+        options:
+          - release
+          - debug
 
 jobs:
-  test:
+  build-ios:
     runs-on: macos-latest
 
     steps:
@@ -30,5 +34,23 @@ jobs:
       - name: Run Flutter analyze
         run: flutter analyze
 
-      - name: Test completion
-        run: echo "Flutter setup and analyze completed successfully!"
+      - name: Build iOS (No Codesign)
+        run: |
+          flutter build ios --release --no-codesign
+          
+      - name: Create IPA Archive
+        run: |
+          cd build/ios/iphoneos
+          mkdir -p Payload
+          cp -r Runner.app Payload/
+          zip -r ../../../gizli-kitap.ipa Payload/
+          
+      - name: Upload IPA Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gizli-kitap-ios
+          path: gizli-kitap.ipa
+          retention-days: 30
+
+      - name: Build completion
+        run: echo "iOS build completed successfully! IPA file is ready for download."
