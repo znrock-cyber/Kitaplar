@@ -287,9 +287,9 @@ class _BrowserScreenState extends State<BrowserScreen> {
           ),
           // Loading indicator
           if (_isLoading)
-            LinearProgressIndicator(
-              backgroundColor: Colors.grey[800],
-              valueColor: const AlwaysStoppedAnimation<Color>(Colors.orange),
+            const LinearProgressIndicator(
+              backgroundColor: Colors.grey,
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.orange),
             ),
           // Content
           Expanded(

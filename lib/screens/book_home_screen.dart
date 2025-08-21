@@ -6,7 +6,7 @@ import 'browser_screen.dart';
 
 class BookHomeScreen extends StatefulWidget {
   @override
-  _BookHomeScreenState createState() => _BookHomeScreenState();
+  State<BookHomeScreen> createState() => _BookHomeScreenState();
 }
 
 class _BookHomeScreenState extends State<BookHomeScreen> {
