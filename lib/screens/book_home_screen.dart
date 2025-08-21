@@ -13,7 +13,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
   int _selectedIndex = 0;
   String _searchQuery = '';
   String _selectedCategory = 'All';
-  List<String> _favoriteBooks = [];
+  final List<String> _favoriteBooks = [];
 
   final List<Map<String, dynamic>> books = [
     // Telifsiz Klasik Eserler (Project Gutenberg)
@@ -232,7 +232,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: Colors.grey[900],
-          title: Text(
+          title: const Text(
             'Favorite Books',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
@@ -240,28 +240,28 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
             width: double.maxFinite,
             height: 400,
             child: favoriteBooksList.isEmpty
-                ? Center(
+                ? const Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
                           Icons.favorite_border,
                           size: 64,
-                          color: Colors.grey[600],
+                          color: Colors.grey,
                         ),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16),
                         Text(
                           'No favorite books yet',
                           style: TextStyle(
-                            color: Colors.grey[400],
+                            color: Colors.grey,
                             fontSize: 16,
                           ),
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: 8),
                         Text(
                           'Tap the heart icon on any book to add it to favorites',
                           style: TextStyle(
-                            color: Colors.grey[500],
+                            color: Colors.grey,
                             fontSize: 12,
                           ),
                           textAlign: TextAlign.center,
@@ -290,7 +290,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                         ),
                         title: Text(
                           book['title'],
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                           ),
@@ -323,7 +323,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text(
+              child: const Text(
                 'Close',
                 style: TextStyle(color: Colors.deepPurple),
               ),
@@ -341,7 +341,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         elevation: 0,
-        title: Column(
+        title: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
@@ -363,7 +363,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.search, color: Colors.white),
+            icon: const Icon(Icons.search, color: Colors.white),
             onPressed: () {
               showSearch(
                 context: context,
@@ -372,7 +372,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
             },
           ),
           IconButton(
-            icon: Icon(Icons.notifications_outlined, color: Colors.white),
+            icon: const Icon(Icons.notifications_outlined, color: Colors.white),
             onPressed: () {},
           ),
         ],
@@ -390,15 +390,15 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                   colors: [Colors.deepPurple, Colors.purple[300]!],
                 ),
               ),
-              child: Column(
+              child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Icon(
+                  Icon(
                     Icons.auto_stories,
                     size: 50,
                     color: Colors.white,
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10),
                   Text(
                     'BookShelf',
                     style: TextStyle(
@@ -419,26 +419,27 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
             ),
             ListTile(
               leading: const Icon(Icons.home, color: Colors.white),
-              title: Text('Home', style: TextStyle(color: Colors.white)),
+              title: const Text('Home', style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
               leading: const Icon(Icons.favorite, color: Colors.red),
-              title: Text('Favorites', style: TextStyle(color: Colors.white)),
+              title: const Text('Favorites',
+                  style: TextStyle(color: Colors.white)),
               trailing: _favoriteBooks.isNotEmpty
                   ? Container(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.red,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(12)),
+                        borderRadius: BorderRadius.all(Radius.circular(12)),
                       ),
                       child: Text(
                         _favoriteBooks.length.toString(),
-                        style: TextStyle(color: Colors.white, fontSize: 12),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 12),
                       ),
                     )
                   : null,
@@ -447,40 +448,41 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                 _showFavorites();
               },
             ),
-            Divider(color: Colors.grey[700]),
+            const Divider(color: Colors.grey),
             ListTile(
               leading: const Icon(Icons.privacy_tip, color: Colors.deepPurple),
-              title:
-                  Text('Privacy Policy', style: TextStyle(color: Colors.white)),
+              title: const Text('Privacy Policy',
+                  style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => PrivacyPolicyScreen(),
+                    builder: (context) => const PrivacyPolicyScreen(),
                   ),
                 );
               },
             ),
             ListTile(
               leading: const Icon(Icons.gavel, color: Colors.deepPurple),
-              title: Text('License', style: TextStyle(color: Colors.white)),
+              title:
+                  const Text('License', style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => LicenseScreen(),
+                    builder: (context) => const LicenseScreen(),
                   ),
                 );
               },
             ),
             Divider(color: Colors.grey[700]),
             ListTile(
-              leading: Icon(Icons.info, color: Colors.grey[400]),
-              title: Text('About', style: TextStyle(color: Colors.white)),
-              subtitle: Text('Version 1.0.0',
-                  style: TextStyle(color: Colors.grey[400])),
+              leading: const Icon(Icons.info, color: Colors.grey),
+              title: const Text('About', style: TextStyle(color: Colors.white)),
+              subtitle: const Text('Version 1.0.0',
+                  style: TextStyle(color: Colors.grey)),
               onTap: () {
                 Navigator.pop(context);
                 showAboutDialog(
@@ -509,7 +511,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
               borderRadius: const BorderRadius.all(Radius.circular(25)),
             ),
             child: TextField(
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 hintText: 'Search books, authors, genres...',
                 hintStyle: TextStyle(color: Colors.grey[400]),
@@ -528,7 +530,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => SecretScreen(),
+                      builder: (context) => const SecretScreen(),
                     ),
                   );
                 }
@@ -536,7 +538,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
             ),
           ),
           // Categories
-          Container(
+          SizedBox(
             height: 50,
             child: ListView(
               scrollDirection: Axis.horizontal,
@@ -588,7 +590,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
             // Tarayıcı sekmesi
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => BrowserScreen()),
+              MaterialPageRoute(builder: (context) => const BrowserScreen()),
             );
           } else {
             setState(() {
@@ -596,25 +598,25 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
             });
           }
         },
-        items: [
+        items: const [
           BottomNavigationBarItem(
-            icon: const Icon(Icons.home),
+            icon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.explore),
+            icon: Icon(Icons.explore),
             label: 'Explore',
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.library_books),
+            icon: Icon(Icons.library_books),
             label: 'Library',
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.web),
+            icon: Icon(Icons.web),
             label: 'Tarayıcı',
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.person),
+            icon: Icon(Icons.person),
             label: 'Profile',
           ),
         ],
@@ -625,7 +627,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
 
   Widget _buildCategoryChip(String label, bool isSelected) {
     return Container(
-      margin: EdgeInsets.only(right: 12),
+      margin: const EdgeInsets.only(right: 12),
       child: FilterChip(
         label: Text(
           label,
@@ -728,7 +730,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                   children: [
                     Text(
                       book['title'],
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
@@ -757,7 +759,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                         const SizedBox(width: 4),
                         Text(
                           book['rating'].toString(),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 11,
                             fontWeight: FontWeight.bold,
@@ -774,7 +776,7 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
                           ),
                           child: Text(
                             book['genre'],
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 9,
                               fontWeight: FontWeight.bold,
@@ -797,14 +799,14 @@ class _BookHomeScreenState extends State<BookHomeScreen> {
 class BookDetailScreen extends StatefulWidget {
   final Map<String, dynamic> book;
 
-  const BookDetailScreen({Key? key, required this.book}) : super(key: key);
+  const BookDetailScreen({super.key, required this.book});
 
   @override
-  _BookDetailScreenState createState() => _BookDetailScreenState();
+  State<BookDetailScreen> createState() => _BookDetailScreenState();
 }
 
 class _BookDetailScreenState extends State<BookDetailScreen> {
-  List<String> _favoriteBooks = [];
+  final List<String> _favoriteBooks = [];
 
   @override
   Widget build(BuildContext context) {
@@ -842,7 +844,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                             BoxShadow(
                               color: Colors.black.withValues(alpha: 0.3),
                               blurRadius: 10,
-                              offset: Offset(0, 5),
+                              offset: const Offset(0, 5),
                             ),
                           ],
                         ),
@@ -855,7 +857,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                       const SizedBox(height: 20),
                       Text(
                         widget.book['title'],
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -889,7 +891,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                       const SizedBox(width: 4),
                       Text(
                         widget.book['rating'].toString(),
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -926,7 +928,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                   ),
                   const SizedBox(height: 30),
                   // Description
-                  Text(
+                  const Text(
                     'Description',
                     style: TextStyle(
                       color: Colors.white,
@@ -945,7 +947,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                   ),
                   const SizedBox(height: 30),
                   // Content Preview
-                  Text(
+                  const Text(
                     'Preview',
                     style: TextStyle(
                       color: Colors.white,
@@ -991,7 +993,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
-                          child: Text(
+                          child: const Text(
                             'Read Now',
                             style: TextStyle(
                               color: Colors.white,
@@ -1042,14 +1044,14 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
 class BookReaderScreen extends StatefulWidget {
   final Map<String, dynamic> book;
 
-  const BookReaderScreen({Key? key, required this.book}) : super(key: key);
+  const BookReaderScreen({super.key, required this.book});
 
   @override
-  _BookReaderScreenState createState() => _BookReaderScreenState();
+  State<BookReaderScreen> createState() => _BookReaderScreenState();
 }
 
 class _BookReaderScreenState extends State<BookReaderScreen> {
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
   int _currentPage = 0;
 
   final List<String> _pages = [
@@ -1073,7 +1075,7 @@ class _BookReaderScreenState extends State<BookReaderScreen> {
         ),
         title: Text(
           widget.book['title'],
-          style: TextStyle(color: Colors.white, fontSize: 18),
+          style: const TextStyle(color: Colors.white, fontSize: 18),
         ),
         actions: [
           IconButton(
@@ -1135,7 +1137,7 @@ class _BookReaderScreenState extends State<BookReaderScreen> {
                   child: SingleChildScrollView(
                     child: Text(
                       _pages[index],
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,
                         height: 1.8,
@@ -1170,7 +1172,7 @@ class _BookReaderScreenState extends State<BookReaderScreen> {
                 ),
                 Text(
                   '${_currentPage + 1} / ${_pages.length}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -1213,14 +1215,14 @@ class BookSearchDelegate extends SearchDelegate<String> {
   @override
   ThemeData appBarTheme(BuildContext context) {
     return ThemeData(
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         backgroundColor: Colors.black,
         iconTheme: IconThemeData(color: Colors.white),
       ),
       inputDecorationTheme: InputDecorationTheme(
         hintStyle: TextStyle(color: Colors.grey[400]),
       ),
-      textTheme: TextTheme(
+      textTheme: const TextTheme(
         titleLarge: TextStyle(color: Colors.white, fontSize: 18),
       ),
     );
@@ -1287,8 +1289,8 @@ class BookSearchDelegate extends SearchDelegate<String> {
             ),
             title: Text(
               book['title'],
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.bold),
             ),
             subtitle: Text(
               book['author'],

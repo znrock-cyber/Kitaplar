@@ -4,8 +4,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 class BrowserScreen extends StatefulWidget {
+  const BrowserScreen({super.key});
+  
   @override
-  _BrowserScreenState createState() => _BrowserScreenState();
+  State<BrowserScreen> createState() => _BrowserScreenState();
 }
 
 class _BrowserScreenState extends State<BrowserScreen> {
@@ -15,7 +17,7 @@ class _BrowserScreenState extends State<BrowserScreen> {
   bool _isLoading = true;
   bool _canGoBack = false;
   bool _canGoForward = false;
-  List<String> _history = [];
+  final List<String> _history = [];
   List<Map<String, String>> _bookmarks = [];
   bool _showBookmarks = false;
 
@@ -106,14 +108,14 @@ class _BrowserScreenState extends State<BrowserScreen> {
         final titleController = TextEditingController();
         return AlertDialog(
           backgroundColor: Colors.grey[900],
-          title: Text('Yer İmi Ekle', style: TextStyle(color: Colors.white)),
+          title: const Text('Yer İmi Ekle', style: TextStyle(color: Colors.white)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: titleController,
                 style: const TextStyle(color: Colors.white),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Başlık',
                   labelStyle: TextStyle(color: Colors.grey),
                   enabledBorder: UnderlineInputBorder(
@@ -121,17 +123,17 @@ class _BrowserScreenState extends State<BrowserScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 'URL: $_currentUrl',
-                style: TextStyle(color: Colors.grey, fontSize: 12),
+                style: const TextStyle(color: Colors.grey, fontSize: 12),
               ),
             ],
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('İptal', style: TextStyle(color: Colors.grey)),
+              child: const Text('İptal', style: TextStyle(color: Colors.grey)),
             ),
             TextButton(
               onPressed: () {
@@ -146,7 +148,7 @@ class _BrowserScreenState extends State<BrowserScreen> {
                 }
                 Navigator.pop(context);
               },
-              child: Text('Ekle', style: TextStyle(color: Colors.orange)),
+              child: const Text('Ekle', style: TextStyle(color: Colors.orange)),
             ),
           ],
         );
@@ -156,7 +158,7 @@ class _BrowserScreenState extends State<BrowserScreen> {
 
   void _navigateToUrl(String url) {
     if (!url.startsWith('http://') && !url.startsWith('https://')) {
-      url = 'https://' + url;
+      url = 'https://$url';
     }
     _controller.loadRequest(Uri.parse(url));
     setState(() {
@@ -170,14 +172,14 @@ class _BrowserScreenState extends State<BrowserScreen> {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.grey[900],
-        title: Text('Tarayıcı', style: TextStyle(color: Colors.white)),
+        title: const Text('Tarayıcı', style: TextStyle(color: Colors.white)),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pop(context),
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.bookmark_add, color: Colors.white),
+            icon: const Icon(Icons.bookmark_add, color: Colors.white),
             onPressed: _addBookmark,
           ),
           IconButton(
@@ -224,7 +226,7 @@ class _BrowserScreenState extends State<BrowserScreen> {
                       : null,
                 ),
                 IconButton(
-                  icon: Icon(Icons.refresh, color: Colors.white),
+                  icon: const Icon(Icons.refresh, color: Colors.white),
                   onPressed: () {
                     _controller.reload();
                   },
@@ -238,12 +240,12 @@ class _BrowserScreenState extends State<BrowserScreen> {
                     ),
                     child: TextField(
                       controller: _urlController,
-                      style: TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
+                      style: const TextStyle(color: Colors.white),
+                      decoration: const InputDecoration(
                         hintText: 'URL girin...',
                         hintStyle: TextStyle(color: Colors.grey),
                         border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(
+                        contentPadding: EdgeInsets.symmetric(
                           horizontal: 16,
                           vertical: 12,
                         ),
@@ -253,7 +255,7 @@ class _BrowserScreenState extends State<BrowserScreen> {
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.search, color: Colors.white),
+                  icon: const Icon(Icons.search, color: Colors.white),
                   onPressed: () {
                     _navigateToUrl(_urlController.text);
                   },
@@ -287,7 +289,7 @@ class _BrowserScreenState extends State<BrowserScreen> {
           if (_isLoading)
             LinearProgressIndicator(
               backgroundColor: Colors.grey[800],
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.orange),
+              valueColor: const AlwaysStoppedAnimation<Color>(Colors.orange),
             ),
           // Content
           Expanded(
@@ -309,7 +311,7 @@ class _BrowserScreenState extends State<BrowserScreen> {
         children: [
           Container(
             padding: const EdgeInsets.all(16),
-            child: Text(
+            child: const Text(
               'Yer İmleri',
               style: TextStyle(
                 color: Colors.white,
@@ -320,7 +322,7 @@ class _BrowserScreenState extends State<BrowserScreen> {
           ),
           Expanded(
             child: _bookmarks.isEmpty
-                ? Center(
+                ? const Center(
                     child: Text(
                       'Henüz yer imi eklenmemiş',
                       style: TextStyle(color: Colors.grey),
@@ -331,19 +333,19 @@ class _BrowserScreenState extends State<BrowserScreen> {
                     itemBuilder: (context, index) {
                       final bookmark = _bookmarks[index];
                       return ListTile(
-                        leading: Icon(Icons.bookmark, color: Colors.orange),
+                        leading: const Icon(Icons.bookmark, color: Colors.orange),
                         title: Text(
                           bookmark['title'] ?? '',
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                         ),
                         subtitle: Text(
                           bookmark['url'] ?? '',
-                          style: TextStyle(color: Colors.grey),
+                          style: const TextStyle(color: Colors.grey),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                         trailing: IconButton(
-                          icon: Icon(Icons.delete, color: Colors.red),
+                          icon: const Icon(Icons.delete, color: Colors.red),
                           onPressed: () {
                             setState(() {
                               _bookmarks.removeAt(index);
@@ -380,8 +382,8 @@ class _BrowserScreenState extends State<BrowserScreen> {
             backgroundColor: color,
             foregroundColor: Colors.white,
             padding: const EdgeInsets.symmetric(vertical: 12),
-            shape: RoundedRectangleBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(8)),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
           ),
           child: Row(

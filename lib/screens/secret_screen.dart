@@ -6,7 +6,7 @@ class SecretScreen extends StatefulWidget {
   const SecretScreen({super.key});
   
   @override
-  _SecretScreenState createState() => _SecretScreenState();
+  State<SecretScreen> createState() => _SecretScreenState();
 }
 
 class _SecretScreenState extends State<SecretScreen> with TickerProviderStateMixin {
